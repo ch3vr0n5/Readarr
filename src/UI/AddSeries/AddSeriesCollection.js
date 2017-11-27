@@ -3,7 +3,7 @@ var SeriesModel = require('../Series/SeriesModel');
 var _ = require('underscore');
 
 module.exports = Backbone.Collection.extend({
-    url   : window.NzbDrone.ApiRoot + '/series/lookup',
+    url   : window.NzbDrone.ApiRoot + '/author/lookup',
     model : SeriesModel,
 
     parse : function(response) {

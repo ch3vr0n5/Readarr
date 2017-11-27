@@ -9,6 +9,7 @@ using NzbDrone.Common.Http;
 using NzbDrone.Core.Exceptions;
 using NzbDrone.Core.MediaCover;
 using NzbDrone.Core.MetadataSource.SkyHook.Resource;
+using NzbDrone.Core.MetadataSource.SkyHook.New_Resources;
 using NzbDrone.Core.Tv;
 
 namespace NzbDrone.Core.MetadataSource.SkyHook
@@ -23,7 +24,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
         public SkyHookProxy(IHttpClient httpClient, ISonarrCloudRequestBuilder requestBuilder, Logger logger)
         {
             _httpClient = httpClient;
-             _requestBuilder = requestBuilder.SkyHookTvdb;
+             _requestBuilder = requestBuilder.Books;
             _logger = logger;
         }
 
@@ -52,46 +53,22 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             }
 
             var episodes = httpResponse.Resource.Episodes.Select(MapEpisode);
-            var series = MapSeries(httpResponse.Resource);
+            //var series = MapSeries(httpResponse.Resource);
 
-            return new Tuple<Series, List<Episode>>(series, episodes.ToList());
+            return null;//new Tuple<Series, List<Episode>>(series, episodes.ToList());
         }
 
         public List<Series> SearchForNewSeries(string title)
         {
             try
             {
-                var lowerTitle = title.ToLowerInvariant();
-
-                if (lowerTitle.StartsWith("tvdb:") || lowerTitle.StartsWith("tvdbid:"))
-                {
-                    var slug = lowerTitle.Split(':')[1].Trim();
-
-                    int tvdbId;
-
-                    if (slug.IsNullOrWhiteSpace() || slug.Any(char.IsWhiteSpace) || !int.TryParse(slug, out tvdbId) || tvdbId <= 0)
-                    {
-                        return new List<Series>();
-                    }
-
-                    try
-                    {
-                        return new List<Series> { GetSeriesInfo(tvdbId).Item1 };
-                    }
-                    catch (SeriesNotFoundException)
-                    {
-                        return new List<Series>();
-                    }
-                }
-
                 var httpRequest = _requestBuilder.Create()
-                                                 .SetSegment("route", "search")
-                                                 .AddQueryParam("term", title.ToLower().Trim())
+                                                 .AddQueryParam("q", "inauthor:" + title.ToLower().Trim())
                                                  .Build();
 
-                var httpResponse = _httpClient.Get<List<ShowResource>>(httpRequest);
+                var httpResponse = _httpClient.Get<List<VolumeResource>>(httpRequest);
 
-                return httpResponse.Resource.SelectList(MapSeries);
+                return httpResponse.Resource.SelectList(MapVolumes);
             }
             catch (HttpException)
             {
@@ -104,60 +81,11 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             }
         }
 
-        private static Series MapSeries(ShowResource show)
+        private static Series MapVolumes(VolumeResource volume)
         {
             var series = new Series();
-            series.TvdbId = show.TvdbId;
 
-            if (show.TvRageId.HasValue)
-            {
-                series.TvRageId = show.TvRageId.Value;
-            }
-
-            if (show.TvMazeId.HasValue)
-            {
-                series.TvMazeId = show.TvMazeId.Value;
-            }
-
-            series.ImdbId = show.ImdbId;
-            series.Title = show.Title;
-            series.CleanTitle = Parser.Parser.CleanSeriesTitle(show.Title);
-            series.SortTitle = SeriesTitleNormalizer.Normalize(show.Title, show.TvdbId);
-
-            if (show.FirstAired != null)
-            {
-                series.FirstAired = DateTime.Parse(show.FirstAired).ToUniversalTime();
-                series.Year = series.FirstAired.Value.Year;
-            }
-
-            series.Overview = show.Overview;
-
-            if (show.Runtime != null)
-            {
-                series.Runtime = show.Runtime.Value;
-            }
-
-            series.Network = show.Network;
-
-            if (show.TimeOfDay != null)
-            {
-                series.AirTime = string.Format("{0:00}:{1:00}", show.TimeOfDay.Hours, show.TimeOfDay.Minutes);
-            }
-
-            series.TitleSlug = show.Slug;
-            series.Status = MapSeriesStatus(show.Status);
-            series.Ratings = MapRatings(show.Rating);
-            series.Genres = show.Genres;
-
-            if (show.ContentRating.IsNotNullOrWhiteSpace())
-            {
-                series.Certification = show.ContentRating.ToUpper();
-            }
-            
-            series.Actors = show.Actors.Select(MapActors).ToList();
-            series.Seasons = show.Seasons.Select(MapSeason).ToList();
-            series.Images = show.Images.Select(MapImage).ToList();
-            series.Monitored = true;
+            series.Title = volume.items[0].volumeInfo.title;
 
             return series;
         }

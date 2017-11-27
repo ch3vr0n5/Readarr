@@ -1,4 +1,4 @@
-using NzbDrone.Common.Http;
+﻿using NzbDrone.Common.Http;
 
 namespace NzbDrone.Common.Cloud
 {
@@ -6,6 +6,7 @@ namespace NzbDrone.Common.Cloud
     {
         IHttpRequestBuilderFactory Services { get; }
         IHttpRequestBuilderFactory SkyHookTvdb { get; }
+        IHttpRequestBuilderFactory Books { get; }
     }
 
     public class SonarrCloudRequestBuilder : ISonarrCloudRequestBuilder
@@ -18,10 +19,15 @@ namespace NzbDrone.Common.Cloud
             SkyHookTvdb = new HttpRequestBuilder("http://skyhook.sonarr.tv/v1/tvdb/{route}/{language}/")
                 .SetSegment("language", "en")
                 .CreateFactory();
+
+            Books = new HttpRequestBuilder("https://www.googleapis.com/books/v1/volumes")
+                .CreateFactory();
         }
 
         public IHttpRequestBuilderFactory Services { get; }
 
         public IHttpRequestBuilderFactory SkyHookTvdb { get; }
+
+        public IHttpRequestBuilderFactory Books { get; }
     }
 }
