@@ -84,13 +84,13 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.New_Resources
 
     public class ListPrice2
     {
-        public int amountInMicros { get; set; }
+        public double amountInMicros { get; set; }
         public string currencyCode { get; set; }
     }
 
     public class RetailPrice2
     {
-        public int amountInMicros { get; set; }
+        public double amountInMicros { get; set; }
         public string currencyCode { get; set; }
     }
 
@@ -144,7 +144,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.New_Resources
         public string textSnippet { get; set; }
     }
 
-    public class Item
+    public class VolumeItem
     {
         public string kind { get; set; }
         public string id { get; set; }
@@ -160,6 +160,6 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.New_Resources
     {
         public string kind { get; set; }
         public int totalItems { get; set; }
-        public List<Item> items { get; set; }
+        public List<VolumeItem> items { get; set; }
     }
 }
