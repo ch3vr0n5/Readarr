@@ -5,6 +5,84 @@ using System.Text;
 
 namespace NzbDrone.Core.MetadataSource.SkyHook.New_Resources
 {
+    public class VolumeResource
+    {
+        public string kind { get; set; }
+        public int totalItems { get; set; }
+        public List<VolumeItem> items { get; set; }
+    }
+
+    public class VolumeItem
+    {
+        public string kind { get; set; }
+        public string id { get; set; }
+        public string etag { get; set; }
+        public string selfLink { get; set; }
+        public VolumeInfo volumeInfo { get; set; }
+        public SaleInfo saleInfo { get; set; }
+        public AccessInfo accessInfo { get; set; }
+        public SearchInfo searchInfo { get; set; }
+    }
+
+    public class VolumeInfo
+    {
+        public string title { get; set; }
+        public string subtitle { get; set; }
+        public List<string> authors { get; set; }
+        public string publisher { get; set; }
+        public string publishedDate { get; set; }
+        public string description { get; set; }
+        public List<IndustryIdentifier> industryIdentifiers { get; set; }
+        public ReadingModes readingModes { get; set; }
+        public int pageCount { get; set; }
+        public string printType { get; set; }
+        public List<string> categories { get; set; }
+        public double averageRating { get; set; }
+        public int ratingsCount { get; set; }
+        public string maturityRating { get; set; }
+        public bool allowAnonLogging { get; set; }
+        public string contentVersion { get; set; }
+        public PanelizationSummary panelizationSummary { get; set; }
+        public ImageLinks imageLinks { get; set; }
+        public string language { get; set; }
+        public string previewLink { get; set; }
+        public string infoLink { get; set; }
+        public string canonicalVolumeLink { get; set; }
+        public SeriesInfo seriesInfo { get; set; }
+    }
+
+    public class SaleInfo
+    {
+        public string country { get; set; }
+        public string saleability { get; set; }
+        public bool isEbook { get; set; }
+        public ListPrice listPrice { get; set; }
+        public RetailPrice retailPrice { get; set; }
+        public string buyLink { get; set; }
+        public List<Offer> offers { get; set; }
+    }
+
+    public class AccessInfo
+    {
+        public string country { get; set; }
+        public string viewability { get; set; }
+        public bool embeddable { get; set; }
+        public bool publicDomain { get; set; }
+        public string textToSpeechPermission { get; set; }
+        public Epub epub { get; set; }
+        public Pdf pdf { get; set; }
+        public string webReaderLink { get; set; }
+        public string accessViewStatus { get; set; }
+        public bool quoteSharingAllowed { get; set; }
+    }
+
+    public class SeriesInfo
+    {
+        public string kind { get; set; }
+        public string bookDisplayNumber { get; set; }
+        public List<VolumeSery> volumeSeries { get; set; }
+    }
+    
     public class IndustryIdentifier
     {
         public string type { get; set; }
@@ -34,40 +112,6 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.New_Resources
         public string seriesId { get; set; }
         public string seriesBookType { get; set; }
         public int orderNumber { get; set; }
-    }
-
-    public class SeriesInfo
-    {
-        public string kind { get; set; }
-        public string bookDisplayNumber { get; set; }
-        public List<VolumeSery> volumeSeries { get; set; }
-    }
-
-    public class VolumeInfo
-    {
-        public string title { get; set; }
-        public string subtitle { get; set; }
-        public List<string> authors { get; set; }
-        public string publisher { get; set; }
-        public string publishedDate { get; set; }
-        public string description { get; set; }
-        public List<IndustryIdentifier> industryIdentifiers { get; set; }
-        public ReadingModes readingModes { get; set; }
-        public int pageCount { get; set; }
-        public string printType { get; set; }
-        public List<string> categories { get; set; }
-        public double averageRating { get; set; }
-        public int ratingsCount { get; set; }
-        public string maturityRating { get; set; }
-        public bool allowAnonLogging { get; set; }
-        public string contentVersion { get; set; }
-        public PanelizationSummary panelizationSummary { get; set; }
-        public ImageLinks imageLinks { get; set; }
-        public string language { get; set; }
-        public string previewLink { get; set; }
-        public string infoLink { get; set; }
-        public string canonicalVolumeLink { get; set; }
-        public SeriesInfo seriesInfo { get; set; }
     }
 
     public class ListPrice
@@ -101,18 +145,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.New_Resources
         public RetailPrice2 retailPrice { get; set; }
         public bool giftable { get; set; }
     }
-
-    public class SaleInfo
-    {
-        public string country { get; set; }
-        public string saleability { get; set; }
-        public bool isEbook { get; set; }
-        public ListPrice listPrice { get; set; }
-        public RetailPrice retailPrice { get; set; }
-        public string buyLink { get; set; }
-        public List<Offer> offers { get; set; }
-    }
-
+    
     public class Epub
     {
         public bool isAvailable { get; set; }
@@ -125,41 +158,8 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.New_Resources
         public string acsTokenLink { get; set; }
     }
 
-    public class AccessInfo
-    {
-        public string country { get; set; }
-        public string viewability { get; set; }
-        public bool embeddable { get; set; }
-        public bool publicDomain { get; set; }
-        public string textToSpeechPermission { get; set; }
-        public Epub epub { get; set; }
-        public Pdf pdf { get; set; }
-        public string webReaderLink { get; set; }
-        public string accessViewStatus { get; set; }
-        public bool quoteSharingAllowed { get; set; }
-    }
-
     public class SearchInfo
     {
         public string textSnippet { get; set; }
-    }
-
-    public class VolumeItem
-    {
-        public string kind { get; set; }
-        public string id { get; set; }
-        public string etag { get; set; }
-        public string selfLink { get; set; }
-        public VolumeInfo volumeInfo { get; set; }
-        public SaleInfo saleInfo { get; set; }
-        public AccessInfo accessInfo { get; set; }
-        public SearchInfo searchInfo { get; set; }
-    }
-
-    public class VolumeResource
-    {
-        public string kind { get; set; }
-        public int totalItems { get; set; }
-        public List<VolumeItem> items { get; set; }
     }
 }

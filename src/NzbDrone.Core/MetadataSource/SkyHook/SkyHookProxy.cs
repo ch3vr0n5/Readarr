@@ -11,6 +11,7 @@ using NzbDrone.Core.MediaCover;
 using NzbDrone.Core.MetadataSource.SkyHook.Resource;
 using NzbDrone.Core.MetadataSource.SkyHook.New_Resources;
 using NzbDrone.Core.Tv;
+using NzbDrone.Core.Models;
 
 namespace NzbDrone.Core.MetadataSource.SkyHook
 {
@@ -18,13 +19,12 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
     {
         private readonly IHttpClient _httpClient;
         private readonly Logger _logger;
-
         private readonly IHttpRequestBuilderFactory _requestBuilder;
 
         public SkyHookProxy(IHttpClient httpClient, ISonarrCloudRequestBuilder requestBuilder, Logger logger)
         {
             _httpClient = httpClient;
-             _requestBuilder = requestBuilder.Books;
+            _requestBuilder = requestBuilder.Books;
             _logger = logger;
         }
 
@@ -58,7 +58,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             return null;//new Tuple<Series, List<Episode>>(series, episodes.ToList());
         }
 
-        public List<Series> SearchForNewSeries(string title)
+        public List<BookGroup> SearchForNewBook(string title)
         {
             try
             {
@@ -67,7 +67,6 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
                                                  .Build();
 
                 var httpResponse = _httpClient.Get<VolumeResource>(httpRequest);
-
                 return httpResponse.Resource.items.SelectList(MapVolumes);
             }
             catch (HttpException)
@@ -81,13 +80,34 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             }
         }
 
-        private static Series MapVolumes(VolumeItem volume)
+        private static BookGroup MapVolumes(VolumeItem volume)
         {
-            var series = new Series();
+            var book = new Book();
+            book.Title = volume.volumeInfo.title;
+            book.SubTitle = volume.volumeInfo.subtitle;
+            book.Description = volume.volumeInfo.description;
+            book.Language = volume.volumeInfo.language;
 
-            series.Title = volume.volumeInfo.title;
+            book.PageCount = volume.volumeInfo.pageCount;
+            book.Rating = volume.volumeInfo.averageRating;
+            book.RatingCount = volume.volumeInfo.ratingsCount;
 
-            return series;
+            book.Authors = volume.volumeInfo.authors;
+            book.Categories = volume.volumeInfo.categories;
+
+            book.Publisher = volume.volumeInfo.publisher;
+            book.PublishedDate = volume.volumeInfo.publishedDate;
+
+            book.ISBN10 = volume.volumeInfo.industryIdentifiers.Where(a => a.type == "ISBN_10").Select(a => a.identifier).SingleOrDefault();
+            book.ISBN13 = volume.volumeInfo.industryIdentifiers.Where(a => a.type == "ISBN_13").Select(a => a.identifier).SingleOrDefault();
+
+            if (volume.volumeInfo.imageLinks != null)
+            {
+                book.RemoteImage = volume.volumeInfo.imageLinks.thumbnail;
+                book.RemoteImageSmall = volume.volumeInfo.imageLinks.smallThumbnail;
+            }
+
+            return new BookGroup() { books = { book } };
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace NzbDrone.Api.Series
 {
-    public class SeriesLookupModule : NzbDroneRestModule<SeriesResource>
+    public class SeriesLookupModule : NzbDroneRestModule<BookGroupResource>
     {
         private readonly ISearchForNewSeries _searchProxy;
 
@@ -17,28 +17,17 @@ namespace NzbDrone.Api.Series
             _searchProxy = searchProxy;
             Get["/"] = x => Search();
         }
-
-
+        
         private Response Search()
         {
-            var tvDbResults = _searchProxy.SearchForNewSeries((string)Request.Query.term);
+            var tvDbResults = _searchProxy.SearchForNewBook((string)Request.Query.term);
             return MapToResource(tvDbResults).AsResponse();
         }
 
-
-        private static IEnumerable<SeriesResource> MapToResource(IEnumerable<Core.Tv.Series> series)
+        private static IEnumerable<BookGroupResource> MapToResource(IEnumerable<Core.Models.BookGroup> groups)
         {
-            foreach (var currentSeries in series)
-            {
-                var resource = currentSeries.ToResource();
-                var poster = currentSeries.Images.FirstOrDefault(c => c.CoverType == MediaCoverTypes.Poster);
-                if (poster != null)
-                {
-                    resource.RemotePoster = poster.Url;
-                }
-
-                yield return resource;
-            }
+            foreach(var group in groups)
+                yield return group.ToResource();
         }
     }
 }
