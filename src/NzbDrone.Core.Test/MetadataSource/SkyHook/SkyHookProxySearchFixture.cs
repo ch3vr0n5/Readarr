@@ -30,11 +30,11 @@ namespace NzbDrone.Core.Test.MetadataSource.SkyHook
         [TestCase("tvdbid: 78804 ", "Doctor Who (2005)")]
         public void successful_search(string title, string expected)
         {
-            var result = Subject.SearchForNewSeries(title);
+            var result = Subject.SearchForNewBook(title);
 
             result.Should().NotBeEmpty();
 
-            result[0].Title.Should().Be(expected);
+            result[0].books[0].Title.Should().Be(expected);
 
             ExceptionVerification.IgnoreWarns();
         }
@@ -47,7 +47,7 @@ namespace NzbDrone.Core.Test.MetadataSource.SkyHook
         [TestCase("adjalkwdjkalwdjklawjdlKAJD;EF")]
         public void no_search_result(string term)
         {
-            var result = Subject.SearchForNewSeries(term);
+            var result = Subject.SearchForNewBook(term);
             result.Should().BeEmpty();
             
             ExceptionVerification.IgnoreWarns();
