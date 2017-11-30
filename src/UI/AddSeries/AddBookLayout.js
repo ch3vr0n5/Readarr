@@ -9,7 +9,7 @@ var RootFolderCollection = require('./RootFolders/RootFolderCollection');
 require('../Series/SeriesCollection');
 
 module.exports = Marionette.Layout.extend({
-    template : 'AddSeries/AddSeriesLayoutTemplate',
+    template : 'AddSeries/AddBookLayoutTemplate',
 
     regions : {
         workspace : '#add-series-workspace'

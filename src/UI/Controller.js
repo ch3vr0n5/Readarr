@@ -3,7 +3,7 @@ var AppLayout = require('./AppLayout');
 var Marionette = require('marionette');
 var ActivityLayout = require('./Activity/ActivityLayout');
 var SettingsLayout = require('./Settings/SettingsLayout');
-var AddSeriesLayout = require('./AddSeries/AddSeriesLayout');
+var AddSeriesLayout = require('./AddSeries/AddBookLayout');
 var WantedLayout = require('./Wanted/WantedLayout');
 var CalendarLayout = require('./Calendar/CalendarLayout');
 var ReleaseLayout = require('./Release/ReleaseLayout');
@@ -12,9 +12,9 @@ var SeasonPassLayout = require('./SeasonPass/SeasonPassLayout');
 var SeriesEditorLayout = require('./Series/Editor/SeriesEditorLayout');
 
 module.exports = NzbDroneController.extend({
-    addAuthor : function(action) {
-        this.setTitle('Add Author');
-        this.showMainRegion(new AddSeriesLayout({ action : action }));
+    addBooks : function(action) {
+        this.setTitle('Add Books');
+        this.showMainRegion(new AddBookLayout({ action : action }));
     },
 
     calendar : function() {
