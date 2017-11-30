@@ -9,6 +9,7 @@ require('./Helpers/Quality');
 require('./Helpers/System');
 require('./Helpers/EachReverse');
 require('./Helpers/String');
+require('./Helpers/Books');
 require('./Handlebars.Debug');
 
 module.exports = function() {
