@@ -18,7 +18,10 @@ namespace NzbDrone.Api.Series
             }
 
             public string Title { get; set; }
+            public string Description { get; set; }
 
+            public string RemoteImageSmall { get; set; }
+            public string RemoteImage { get; set; }
         }
     }
 
@@ -30,8 +33,10 @@ namespace NzbDrone.Api.Series
 
             return new BookGroupResource() { books =
                 group.books.Select(a => new BookGroupResource.BookResource() {
-                    Title = a.Title
-
+                    Title = a.Title,
+                    Description = a.Description,
+                    RemoteImage = a.RemoteImage,
+                    RemoteImageSmall = a.RemoteImage
                 }).ToList()
             };
         }
