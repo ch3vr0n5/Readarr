@@ -63,7 +63,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             try
             {
                 var httpRequest = _requestBuilder.Create()
-                                                 .AddQueryParam("q", "inauthor:" + title.ToLower().Trim())
+                                                 .AddQueryParam("q", title.ToLower().Trim())
                                                  .Build();
 
                 var httpResponse = _httpClient.Get<VolumeResource>(httpRequest);
