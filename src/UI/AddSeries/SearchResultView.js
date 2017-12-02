@@ -18,10 +18,7 @@ var view = Marionette.ItemView.extend({
     template : 'AddSeries/SearchResultViewTemplate',
 
     ui : {
-        //profile         : '.x-profile',
         rootFolder      : '.x-root-folder',
-        //seasonFolder    : '.x-season-folder',
-        //seriesType      : '.x-series-type',
         monitor         : '.x-monitor',
         monitorTooltip  : '.x-monitor-tooltip',
         addButton       : '.x-add',
@@ -32,10 +29,7 @@ var view = Marionette.ItemView.extend({
     events : {
         'click .x-add'            : '_addWithoutSearch',
         'click .x-add-search'     : '_addAndSearch',
-        //'change .x-profile'       : '_profileChanged',
         'change .x-root-folder'   : '_rootFolderChanged',
-        //'change .x-season-folder' : '_seasonFolderChanged',
-        //'change .x-series-type'   : '_seriesTypeChanged',
         'change .x-monitor'       : '_monitorChanged'
     },
 
@@ -55,22 +49,13 @@ var view = Marionette.ItemView.extend({
 
     onRender : function() {
 
-        //var defaultProfile = Config.getValue(Config.Keys.DefaultProfileId);
         var defaultRoot = Config.getValue(Config.Keys.DefaultRootFolderId);
-        var useSeasonFolder = Config.getValueBoolean(Config.Keys.UseSeasonFolder, true);
-        var defaultSeriesType = Config.getValue(Config.Keys.DefaultSeriesType, 'standard');
         var defaultMonitorEpisodes = Config.getValue(Config.Keys.MonitorEpisodes, 'missing');
-
-        //if (Profiles.get(defaultProfile)) {
-        //    this.ui.profile.val(defaultProfile);
-        //}
 
         if (RootFolders.get(defaultRoot)) {
             this.ui.rootFolder.val(defaultRoot);
         }
 
-        //this.ui.seasonFolder.prop('checked', useSeasonFolder);
-        //this.ui.seriesType.val(defaultSeriesType);
         this.ui.monitor.val(defaultMonitorEpisodes);
 
         //TODO: make this work via onRender, FM?
@@ -93,13 +78,11 @@ var view = Marionette.ItemView.extend({
     },
 
     _configureTemplateHelpers : function() {
-        var existingSeries = SeriesCollection.where({ tvdbId : this.model.get('tvdbId') });
+        var existingSeries = SeriesCollection.where({ googleID : this.model.get('googleID') });
 
         if (existingSeries.length > 0) {
             this.templateHelpers.existing = existingSeries[0].toJSON();
         }
-
-        //this.templateHelpers.profiles = Profiles.toJSON();
 
         if (!this.model.get('isExisting')) {
             this.templateHelpers.rootFolders = RootFolders.toJSON();
@@ -107,34 +90,13 @@ var view = Marionette.ItemView.extend({
     },
 
     _onConfigUpdated : function(options) {
-        // if (options.key === Config.Keys.DefaultProfileId) {
-        //     this.ui.profile.val(options.value);
-        // }
-        //else 
         if (options.key === Config.Keys.DefaultRootFolderId) {
             this.ui.rootFolder.val(options.value);
         }
-
-        //else if (options.key === Config.Keys.UseSeasonFolder) {
-            //this.ui.seasonFolder.prop('checked', options.value);
-        //}
-
-        //else if (options.key === Config.Keys.DefaultSeriesType) {
-        //    this.ui.seriesType.val(options.value);
-        //}
-
         else if (options.key === Config.Keys.MonitorEpisodes) {
             this.ui.monitor.val(options.value);
         }
     },
-
-    // _profileChanged : function() {
-    //     Config.setValue(Config.Keys.DefaultProfileId, this.ui.profile.val());
-    // },
-
-    // _seasonFolderChanged : function() {
-    //     Config.setValue(Config.Keys.UseSeasonFolder, this.ui.seasonFolder.prop('checked'));
-    // },
 
     _rootFolderChanged : function() {
         var rootFolderValue = this.ui.rootFolder.val();
@@ -146,10 +108,6 @@ var view = Marionette.ItemView.extend({
             Config.setValue(Config.Keys.DefaultRootFolderId, rootFolderValue);
         }
     },
-
-    // _seriesTypeChanged : function() {
-    //     Config.setValue(Config.Keys.DefaultSeriesType, this.ui.seriesType.val());
-    // },
 
     _monitorChanged : function() {
         Config.setValue(Config.Keys.MonitorEpisodes, this.ui.monitor.val());
@@ -176,19 +134,12 @@ var view = Marionette.ItemView.extend({
         addButton.addClass('disabled');
         addSearchButton.addClass('disabled');
 
-        //var profile = this.ui.profile.val();
         var rootFolderPath = this.ui.rootFolder.children(':selected').text();
-        //var seriesType = this.ui.seriesType.val();
-        //var seasonFolder = this.ui.seasonFolder.prop('checked');
-
         var options = this._getAddSeriesOptions();
         options.searchForMissingEpisodes = searchForMissingEpisodes;
 
         this.model.set({
-            //profileId      : profile,
             rootFolderPath : rootFolderPath,
-            //seasonFolder   : seasonFolder,
-            //seriesType     : seriesType,
             addOptions     : options,
             monitored      : true
         }, { silent : true });
@@ -257,15 +208,6 @@ var view = Marionette.ItemView.extend({
             options.ignoreEpisodesWithFiles = true;
             options.ignoreEpisodesWithoutFiles = true;
         }
-
-        // else if (monitor === 'latest') {
-        //     this.model.setSeasonPass(lastSeason.seasonNumber);
-        // }
-
-        // else if (monitor === 'first') {
-        //     this.model.setSeasonPass(lastSeason.seasonNumber + 1);
-        //     this.model.setSeasonMonitored(firstSeason.seasonNumber);
-        // }
 
         else if (monitor === 'missing') {
             options.ignoreEpisodesWithFiles = true;
