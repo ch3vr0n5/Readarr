@@ -73,11 +73,11 @@ namespace NzbDrone.Api.Series
                            .SetValidator(seriesAncestorValidator)
                            .When(s => !s.Path.IsNullOrWhiteSpace());
 
-            SharedValidator.RuleFor(s => s.ProfileId).SetValidator(profileExistsValidator);
+            //SharedValidator.RuleFor(s => s.ProfileId).SetValidator(profileExistsValidator);
 
             PostValidator.RuleFor(s => s.Path).IsValidPath().When(s => s.RootFolderPath.IsNullOrWhiteSpace());
             PostValidator.RuleFor(s => s.RootFolderPath).IsValidPath().When(s => s.Path.IsNullOrWhiteSpace());
-            PostValidator.RuleFor(s => s.TvdbId).GreaterThan(0).SetValidator(seriesExistsValidator);
+            //PostValidator.RuleFor(s => s.TvdbId).GreaterThan(0).SetValidator(seriesExistsValidator);
 
             PutValidator.RuleFor(s => s.Path).IsValidPath();
         }
