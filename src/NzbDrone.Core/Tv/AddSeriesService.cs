@@ -43,7 +43,7 @@ namespace NzbDrone.Core.Tv
         {
             Ensure.That(newSeries, () => newSeries).IsNotNull();
 
-            newSeries = AddSkyhookData(newSeries);
+            //newSeries = AddSkyhookData(newSeries);
 
             if (string.IsNullOrWhiteSpace(newSeries.Path))
             {
@@ -68,32 +68,32 @@ namespace NzbDrone.Core.Tv
             return newSeries;
         }
 
-        private Series AddSkyhookData(Series newSeries)
-        {
-            Tuple<Series, List<Episode>> tuple;
+        //private Series AddSkyhookData(Series newSeries)
+        //{
+        //    Tuple<Series, List<Episode>> tuple;
 
-            try
-            {
-                tuple = _seriesInfo.GetSeriesInfo(newSeries.TvdbId);
-            }
-            catch (SeriesNotFoundException)
-            {
-                _logger.Error("tvdbid {1} was not found, it may have been removed from TheTVDB.", newSeries.TvdbId);
+        //    try
+        //    {
+        //        tuple = _seriesInfo.GetSeriesInfo(newSeries.TvdbId);
+        //    }
+        //    catch (SeriesNotFoundException)
+        //    {
+        //        _logger.Error("tvdbid {1} was not found, it may have been removed from TheTVDB.", newSeries.TvdbId);
                 
-                throw new ValidationException(new List<ValidationFailure>
-                                              {
-                                                  new ValidationFailure("TvdbId", "A series with this ID was not found", newSeries.TvdbId)
-                                              });
-            }
+        //        throw new ValidationException(new List<ValidationFailure>
+        //                                      {
+        //                                          new ValidationFailure("TvdbId", "A series with this ID was not found", newSeries.TvdbId)
+        //                                      });
+        //    }
 
-            var series = tuple.Item1;
+        //    var series = tuple.Item1;
 
-            // If seasons were passed in on the new series use them, otherwise use the seasons from Skyhook
-            newSeries.Seasons = newSeries.Seasons != null && newSeries.Seasons.Any() ? newSeries.Seasons : series.Seasons;
+        //    // If seasons were passed in on the new series use them, otherwise use the seasons from Skyhook
+        //    newSeries.Seasons = newSeries.Seasons != null && newSeries.Seasons.Any() ? newSeries.Seasons : series.Seasons;
 
-            series.ApplyChanges(newSeries);
+        //    series.ApplyChanges(newSeries);
 
-            return series;
-        }
+        //    return series;
+        //}
     }
 }

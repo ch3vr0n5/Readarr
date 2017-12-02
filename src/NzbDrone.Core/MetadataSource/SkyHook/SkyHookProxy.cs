@@ -15,7 +15,7 @@ using NzbDrone.Core.Models;
 
 namespace NzbDrone.Core.MetadataSource.SkyHook
 {
-    public class SkyHookProxy : IProvideSeriesInfo, ISearchForNewSeries
+    public class SkyHookProxy : ISearchForNewSeries //IProvideSeriesInfo,
     {
         private readonly IHttpClient _httpClient;
         private readonly Logger _logger;
@@ -28,35 +28,35 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             _logger = logger;
         }
 
-        public Tuple<Series, List<Episode>> GetSeriesInfo(int tvdbSeriesId)
-        {
-            var httpRequest = _requestBuilder.Create()
-                                             .SetSegment("route", "shows")
-                                             .Resource(tvdbSeriesId.ToString())
-                                             .Build();
+        //public Tuple<Series, List<Episode>> GetSeriesInfo(int tvdbSeriesId)
+        //{
+        //    var httpRequest = _requestBuilder.Create()
+        //                                     .SetSegment("route", "shows")
+        //                                     .Resource(tvdbSeriesId.ToString())
+        //                                     .Build();
 
-            httpRequest.AllowAutoRedirect = true;
-            httpRequest.SuppressHttpError = true;
+        //    httpRequest.AllowAutoRedirect = true;
+        //    httpRequest.SuppressHttpError = true;
 
-            var httpResponse = _httpClient.Get<ShowResource>(httpRequest);
+        //    var httpResponse = _httpClient.Get<ShowResource>(httpRequest);
 
-            if (httpResponse.HasHttpError)
-            {
-                if (httpResponse.StatusCode == HttpStatusCode.NotFound)
-                {
-                    throw new SeriesNotFoundException(tvdbSeriesId);
-                }
-                else
-                {
-                    throw new HttpException(httpRequest, httpResponse);
-                }
-            }
+        //    if (httpResponse.HasHttpError)
+        //    {
+        //        if (httpResponse.StatusCode == HttpStatusCode.NotFound)
+        //        {
+        //            throw new SeriesNotFoundException(tvdbSeriesId);
+        //        }
+        //        else
+        //        {
+        //            throw new HttpException(httpRequest, httpResponse);
+        //        }
+        //    }
 
-            //var episodes = httpResponse.Resource.Episodes.Select(MapEpisode);
-            //var series = MapSeries(httpResponse.Resource);
+        //    //var episodes = httpResponse.Resource.Episodes.Select(MapEpisode);
+        //    //var series = MapSeries(httpResponse.Resource);
 
-            return null;//new Tuple<Series, List<Episode>>(series, episodes.ToList());
-        }
+        //    return null;//new Tuple<Series, List<Episode>>(series, episodes.ToList());
+        //}
 
         public List<BookGroup> SearchForNewBook(string title)
         {
