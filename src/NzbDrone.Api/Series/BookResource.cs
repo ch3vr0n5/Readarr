@@ -17,8 +17,12 @@ namespace NzbDrone.Api.Series
 
             }
 
+            public string GoogleID { get; set; }
+
             public string Title { get; set; }
             public string Description { get; set; }
+
+            public List<string> Authors { get; set; }
 
             public string RemoteImageSmall { get; set; }
             public string RemoteImage { get; set; }
@@ -36,7 +40,9 @@ namespace NzbDrone.Api.Series
                     Title = a.Title,
                     Description = a.Description,
                     RemoteImage = a.RemoteImage,
-                    RemoteImageSmall = a.RemoteImage
+                    RemoteImageSmall = a.RemoteImage,
+                    Authors = a.Authors,
+                    GoogleID = a.GoogleID
                 }).ToList()
             };
         }

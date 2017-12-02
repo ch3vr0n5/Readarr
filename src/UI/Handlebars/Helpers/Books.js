@@ -14,6 +14,14 @@ Handlebars.registerHelper('poster', function() {
     return new Handlebars.SafeString('<img class="series-poster placeholder-image" src="{0}">'.format(placeholder));
 });
 
+Handlebars.registerHelper('authors', function() {
+    var authors = "";
+    this.authors.forEach(function(v){
+        authors += ", " + v;
+    });
+    return authors.substring(2);
+});
+
 Handlebars.registerHelper('googleUrl', function() {
     return "";
 });
