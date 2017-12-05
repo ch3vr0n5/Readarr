@@ -37,16 +37,16 @@ namespace NzbDrone.Core.Test.TvTests
                   .Setup(s => s.GetSeries(_series.Id))
                   .Returns(_series);
             
-            Mocker.GetMock<IProvideSeriesInfo>()
-                  .Setup(s => s.GetSeriesInfo(It.IsAny<int>()))
-                  .Callback<int>(p => { throw new SeriesNotFoundException(p); });
+        //    Mocker.GetMock<IProvideSeriesInfo>()
+        //          .Setup(s => s.GetSeriesInfo(It.IsAny<int>()))
+        //          .Callback<int>(p => { throw new SeriesNotFoundException(p); });
         }
 
         private void GivenNewSeriesInfo(Series series)
         {
-            Mocker.GetMock<IProvideSeriesInfo>()
-                  .Setup(s => s.GetSeriesInfo(_series.TvdbId))
-                  .Returns(new Tuple<Series, List<Episode>>(series, new List<Episode>()));
+            //Mocker.GetMock<IProvideSeriesInfo>()
+            //      .Setup(s => s.GetSeriesInfo(_series.TvdbId))
+            //      .Returns(new Tuple<Series, List<Episode>>(series, new List<Episode>()));
         }
 
         [Test]
