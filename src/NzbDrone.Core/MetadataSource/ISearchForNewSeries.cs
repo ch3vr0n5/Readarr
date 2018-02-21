@@ -5,6 +5,6 @@ namespace NzbDrone.Core.MetadataSource
 {
     public interface ISearchForNewSeries
     {
-        List<BookGroup> SearchForNewBook(string title);
+        List<Book> SearchForNewBook(string title);
     }
 }

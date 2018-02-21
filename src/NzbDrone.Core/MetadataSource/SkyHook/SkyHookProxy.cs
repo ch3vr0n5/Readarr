@@ -58,7 +58,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
         //    return null;//new Tuple<Series, List<Episode>>(series, episodes.ToList());
         //}
 
-        public List<BookGroup> SearchForNewBook(string title)
+        public List<Book> SearchForNewBook(string title)
         {
             try
             {
@@ -80,11 +80,12 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             }
         }
 
-        private static BookGroup MapVolumes(VolumeItem volume)
+        private static Book MapVolumes(VolumeItem volume)
         {
             var book = new Book();
             book.Title = volume.volumeInfo.title;
             book.SubTitle = volume.volumeInfo.subtitle;
+            book.TitleSlug = volume.volumeInfo.title.ToLower().Replace(" ", "-").Replace("and", "");
             book.Description = volume.volumeInfo.description;
             book.Language = volume.volumeInfo.language;
 
@@ -98,8 +99,8 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             book.Publisher = volume.volumeInfo.publisher;
             book.PublishedDate = volume.volumeInfo.publishedDate;
 
-            book.ISBN10 = volume.volumeInfo.industryIdentifiers.Where(a => a.type == "ISBN_10").Select(a => a.identifier).SingleOrDefault();
-            book.ISBN13 = volume.volumeInfo.industryIdentifiers.Where(a => a.type == "ISBN_13").Select(a => a.identifier).SingleOrDefault();
+            //book.ISBN10 = volume.volumeInfo.industryIdentifiers.Where(a => a.type == "ISBN_10").Select(a => a.identifier).SingleOrDefault() ?? "";
+            //book.ISBN13 = volume.volumeInfo.industryIdentifiers.Where(a => a.type == "ISBN_13").Select(a => a.identifier).SingleOrDefault() ?? "";
 
             if (volume.volumeInfo.imageLinks != null)
             {
@@ -107,7 +108,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
                 book.RemoteImageSmall = volume.volumeInfo.imageLinks.smallThumbnail;
             }
 
-            return new BookGroup() { books = { book } };
+            return book;
         }
     }
 }

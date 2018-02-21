@@ -1,4 +1,5 @@
 ﻿using NzbDrone.Core.Datastore;
+using NzbDrone.Core.Tv;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,10 @@ namespace NzbDrone.Core.Models
         public string GoogleID { get; set; }
 
         public string Title { get; set; }
+        public string TitleSlug { get; set; }
         public string SubTitle { get; set; }
+        public string CleanTitle { get; set; }
+
         public string Description { get; set; }
         public string Language { get; set; }
 
@@ -41,6 +45,8 @@ namespace NzbDrone.Core.Models
         public bool Monitored { get; set; }
         public string Path { get; set; }
         public string RootFolderPath { get; set; }
+        public DateTime Added { get; set; }
+        public AddSeriesOptions AddOptions { get; set; }
 
         public void ApplyChanges(Book otherBook)
         {
