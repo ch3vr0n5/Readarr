@@ -1,74 +1,72 @@
-{{#each books}}
-    <div class="search-item {{#unless isExisting}}search-item-new{{/unless}}">
-        <div class="row">
-            <div class="col-md-2">
-                <a href="{{googleUrl}}" target="_blank">{{poster}}</a>
+<div class="search-item {{#unless isExisting}}search-item-new{{/unless}}">
+    <div class="row">
+        <div class="col-md-2">
+            <a href="{{googleUrl}}" target="_blank">{{poster}}</a>
+        </div>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="series-title">{{title}}</h2>
+                    <h4 class="series-title">{{authors}}</h3>
+                </div>
             </div>
 
-            <div class="col-md-10">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="series-title">{{title}}</h2>
-                        <h4 class="series-title">{{authors}}</h3>
-                    </div>
+            <div class="row new-series-overview x-overview">
+                <div class="col-md-12 overview-internal">
+                    {{description}}
                 </div>
+            </div>
 
-                <div class="row new-series-overview x-overview">
-                    <div class="col-md-12 overview-internal">
-                        {{description}}
-                    </div>
-                </div>
-
-                <div class="row">
-                    {{#unless existing}}
-                        {{#unless path}}
-                            <div class="form-group col-md-4">
-                                <label>Path</label>
-                                {{> RootFolderSelectionPartial @root.rootFolders}}
-                            </div>
-                        {{/unless}}
-
+            <div class="row">
+                {{#unless existing}}
+                    {{#unless path}}
                         <div class="form-group col-md-4">
-                            <label>Monitor <i class="icon-sonarr-form-info monitor-tooltip x-monitor-tooltip"></i></label>
-                            <select class="form-control col-md-2 x-monitor">
-                                <option value="all">All</option>
-                                <option value="future">Future</option>
-                                <option value="missing">Missing</option>
-                                <option value="existing">Existing</option>
-                                <option value="none">None</option>
-                            </select>
+                            <label>Path</label>
+                            {{> RootFolderSelectionPartial @root.rootFolders}}
                         </div>
+                    {{/unless}}
 
-                        {{#unless existing}}
-                            {{#if title}}
-                                <div class="form-group col-md-4 text-right">
-                                    <div class="btn-group">
-                                        <button class="btn btn-success add x-add" title="Add">
-                                            <i class="icon-sonarr-add"></i>
-                                        </button>
+                    <div class="form-group col-md-4">
+                        <label>Monitor <i class="icon-sonarr-form-info monitor-tooltip x-monitor-tooltip"></i></label>
+                        <select class="form-control col-md-2 x-monitor">
+                            <option value="all">All</option>
+                            <option value="future">Future</option>
+                            <option value="missing">Missing</option>
+                            <option value="existing">Existing</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
 
-                                        <button class="btn btn-success add x-add-search" title="Add and Search for missing episodes">
-                                            <i class="icon-sonarr-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            {{else}}
-                                <div class="col-md-4 text-right" title="Series requires an English title">
-                                    <button class="btn add-series disabled">
-                                        Add
+                    {{#unless existing}}
+                        {{#if title}}
+                            <div class="form-group col-md-4 text-right">
+                                <div class="btn-group">
+                                    <button class="btn btn-success add x-add" title="Add">
+                                        <i class="icon-sonarr-add"></i>
+                                    </button>
+
+                                    <button class="btn btn-success add x-add-search" title="Add and Search for missing episodes">
+                                        <i class="icon-sonarr-search"></i>
                                     </button>
                                 </div>
-                            {{/if}}
-                        {{else}}
-                            <div class="col-md-4 text-right">
-                                <a class="btn btn-default" href="{{route}}">
-                                    Already Exists
-                                </a>
                             </div>
-                        {{/unless}}
+                        {{else}}
+                            <div class="col-md-4 text-right" title="Series requires an English title">
+                                <button class="btn add-series disabled">
+                                    Add
+                                </button>
+                            </div>
+                        {{/if}}
+                    {{else}}
+                        <div class="col-md-4 text-right">
+                            <a class="btn btn-default" href="{{route}}">
+                                Already Exists
+                            </a>
+                        </div>
                     {{/unless}}
-                </div>
+                {{/unless}}
             </div>
         </div>
     </div>
-{{/each}}
+</div>

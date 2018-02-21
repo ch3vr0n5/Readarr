@@ -150,7 +150,6 @@ var view = Marionette.ItemView.extend({
         if (searchForMissingEpisodes) {
             this.ui.addSearchButton.spinForPromise(promise);
         }
-
         else {
             this.ui.addButton.spinForPromise(promise);
         }
@@ -162,16 +161,15 @@ var view = Marionette.ItemView.extend({
 
         promise.done(function() {
             SeriesCollection.add(self.model);
-
             self.close();
 
             Messenger.show({
                 message        : 'Added: ' + self.model.get('title'),
                 actions        : {
                     goToSeries : {
-                        label  : 'Go to Series',
+                        label  : 'Go to Book',
                         action : function() {
-                            Backbone.history.navigate('/series/' + self.model.get('titleSlug'), { trigger : true });
+                            Backbone.history.navigate('/book/' + self.model.get('titleSlug'), { trigger : true });
                         }
                     }
                 },
@@ -190,10 +188,10 @@ var view = Marionette.ItemView.extend({
 
     _getAddSeriesOptions : function() {
         var monitor = this.ui.monitor.val();
-        var lastSeason = _.max(this.model.get('seasons'), 'seasonNumber');
-        var firstSeason = _.min(_.reject(this.model.get('seasons'), { seasonNumber : 0 }), 'seasonNumber');
+        //var lastSeason = _.max(this.model.get('seasons'), 'seasonNumber');
+        //var firstSeason = _.min(_.reject(this.model.get('seasons'), { seasonNumber : 0 }), 'seasonNumber');
 
-        this.model.setSeasonPass(firstSeason.seasonNumber);
+        //this.model.setSeasonPass(firstSeason.seasonNumber);
 
         var options = {
             ignoreEpisodesWithFiles    : false,
@@ -218,7 +216,7 @@ var view = Marionette.ItemView.extend({
         }
 
         else if (monitor === 'none') {
-            this.model.setSeasonPass(lastSeason.seasonNumber + 1);
+            //this.model.setSeasonPass(lastSeason.seasonNumber + 1);
         }
 
         return options;

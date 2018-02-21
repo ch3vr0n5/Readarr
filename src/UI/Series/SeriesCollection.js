@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var PageableCollection = require('backbone.pageable');
-var SeriesModel = require('./SeriesModel');
+var BookModel = require('../Book/BookModel');
 var ApiData = require('../Shared/ApiData');
 var AsFilteredCollection = require('../Mixins/AsFilteredCollection');
 var AsSortedCollection = require('../Mixins/AsSortedCollection');
@@ -10,9 +10,9 @@ var moment = require('moment');
 require('../Mixins/backbone.signalr.mixin');
 
 var Collection = PageableCollection.extend({
-    url       : window.NzbDrone.ApiRoot + '/series',
-    model     : SeriesModel,
-    tableName : 'series',
+    url       : window.NzbDrone.ApiRoot + '/book',
+    model     : BookModel,
+    tableName : 'book',
 
     state : {
         sortKey            : 'sortTitle',
@@ -115,6 +115,6 @@ Collection = AsFilteredCollection.call(Collection);
 Collection = AsSortedCollection.call(Collection);
 Collection = AsPersistedStateCollection.call(Collection);
 
-var data = ApiData.get('series');
+var data = ApiData.get('book');
 
 module.exports = new Collection(data, { full : true }).bindSignalR();

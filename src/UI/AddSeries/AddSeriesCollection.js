@@ -1,10 +1,10 @@
 var Backbone = require('backbone');
-var BookGroupModel = require('../Book/BookGroupModel');
+var BookModel = require('../Book/BookModel');
 var _ = require('underscore');
 
 module.exports = Backbone.Collection.extend({
-    url   : window.NzbDrone.ApiRoot + '/author/lookup',
-    model : BookGroupModel,
+    url   : window.NzbDrone.ApiRoot + '/book/lookup',
+    model : BookModel,
 
     parse : function(response) {
         var self = this;
