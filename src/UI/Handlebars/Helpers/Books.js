@@ -15,11 +15,16 @@ Handlebars.registerHelper('poster', function() {
 });
 
 Handlebars.registerHelper('authors', function() {
-    var authors = "";
-    this.authors.forEach(function(v){
-        authors += ", " + v;
-    });
-    return authors.substring(2);
+    if(this.authors)
+    {
+        var authors = "";
+        this.authors.forEach(function(v){
+            authors += ", " + v;
+        });
+        return authors.substring(2);
+    }
+    
+    return null;
 });
 
 Handlebars.registerHelper('googleUrl', function() {
