@@ -1,4 +1,4 @@
-﻿using FluentMigrator;
+using FluentMigrator;
 using NzbDrone.Core.Datastore.Migration.Framework;
 
 namespace NzbDrone.Core.Datastore.Migration
@@ -40,6 +40,16 @@ namespace NzbDrone.Core.Datastore.Migration
                 .WithColumn("UseSceneNumbering").AsBoolean()
                 .WithColumn("FirstAired").AsDateTime().Nullable()
                 .WithColumn("NextAiring").AsDateTime().Nullable();
+
+            Create.TableForModel("Book")
+                .WithColumn("GoogleID").AsString()
+                .WithColumn("Title").AsString()
+                .WithColumn("TitleSlug").AsString().Unique()
+                .WithColumn("SubTitle").AsString()
+                .WithColumn("CleanTitle").AsString()
+                .WithColumn("Description").AsString()
+                .WithColumn("Path").AsString()
+                .WithColumn("Monitored").AsBoolean();
 
             Create.TableForModel("Seasons")
                 .WithColumn("SeriesId").AsInt32()

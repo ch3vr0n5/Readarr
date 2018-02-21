@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Marr.Data;
 using Marr.Data.Mapping;
@@ -34,6 +34,7 @@ using NzbDrone.Core.Extras.Metadata.Files;
 using NzbDrone.Core.Extras.Others;
 using NzbDrone.Core.Extras.Subtitles;
 using NzbDrone.Core.Messaging.Commands;
+using NzbDrone.Core.Models;
 
 namespace NzbDrone.Core.Datastore
 {
@@ -75,6 +76,9 @@ namespace NzbDrone.Core.Datastore
                   .Ignore(s => s.RootFolderPath)
                   .Relationship()
                   .HasOne(s => s.Profile, s => s.ProfileId);
+
+            Mapper.Entity<Book>().RegisterModel("Book")
+                  .Ignore(s => s.RootFolderPath);
 
             Mapper.Entity<EpisodeFile>().RegisterModel("EpisodeFiles")
                   .Ignore(f => f.Path)
