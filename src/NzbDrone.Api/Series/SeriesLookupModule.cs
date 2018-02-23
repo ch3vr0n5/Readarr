@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace NzbDrone.Api.Series
 {
-    public class SeriesLookupModule : NzbDroneRestModule<BookGroupResource>
+    public class SeriesLookupModule : NzbDroneRestModule<BookResource>
     {
         private readonly ISearchForNewSeries _searchProxy;
 
         public SeriesLookupModule(ISearchForNewSeries searchProxy)
-            : base("/author/lookup")
+            : base("/book/lookup")
         {
             _searchProxy = searchProxy;
             Get["/"] = x => Search();
@@ -24,7 +24,7 @@ namespace NzbDrone.Api.Series
             return MapToResource(tvDbResults).AsResponse();
         }
 
-        private static IEnumerable<BookGroupResource> MapToResource(IEnumerable<Core.Models.BookGroup> groups)
+        private static IEnumerable<BookResource> MapToResource(IEnumerable<Core.Models.Book> groups)
         {
             foreach(var group in groups)
                 yield return group.ToResource();
