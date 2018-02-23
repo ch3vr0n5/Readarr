@@ -80,9 +80,9 @@ module.exports = Marionette.Layout.extend({
         collapse   : true,
         items      : [
             {
-                title : 'Add Series',
+                title : 'Add Books',
                 icon  : 'icon-sonarr-add',
-                route : 'addseries'
+                route : 'addbooks'
             },
             {
                 title : 'Season Pass',
@@ -320,19 +320,11 @@ module.exports = Marionette.Layout.extend({
         var series = SeriesCollection.models.length;
         var episodes = 0;
         var episodeFiles = 0;
-        var ended = 0;
-        var continuing = 0;
         var monitored = 0;
 
         _.each(SeriesCollection.models, function(model) {
             episodes += model.get('episodeCount');
             episodeFiles += model.get('episodeFileCount');
-
-            if (model.get('status').toLowerCase() === 'ended') {
-                ended++;
-            } else {
-                continuing++;
-            }
 
             if (model.get('monitored')) {
                 monitored++;
@@ -341,8 +333,6 @@ module.exports = Marionette.Layout.extend({
 
         footerModel.set({
             series       : series,
-            ended        : ended,
-            continuing   : continuing,
             monitored    : monitored,
             unmonitored  : series - monitored,
             episodes     : episodes,
