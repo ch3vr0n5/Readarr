@@ -1,4 +1,4 @@
-﻿using NzbDrone.Api.REST;
+using NzbDrone.Api.REST;
 using NzbDrone.Core.Tv;
 using System;
 using System.Collections.Generic;
@@ -17,8 +17,14 @@ namespace NzbDrone.Api.Series
         public string GoogleID { get; set; }
 
         public string Title { get; set; }
+        public string SubTitle { get; set; }
         public string TitleSlug { get; set; }
         public string Description { get; set; }
+        public string Language { get; set; }
+        public string Publisher { get; set; }
+        public string PublishedDate { get; set; }
+        public string ISBN10 { get; set; }
+        public string ISBN13 { get; set; }
         public string Path { get; set; }
         public string RootFolderPath { get; set; }
 
@@ -38,7 +44,13 @@ namespace NzbDrone.Api.Series
 
             return new BookResource() {
                 Title = book.Title,
+                SubTitle = book.SubTitle,
                 Description = book.Description,
+                Language = book.Language,
+                Publisher = book.Publisher,
+                PublishedDate = book.PublishedDate,
+                ISBN10 = book.ISBN10,
+                ISBN13 = book.ISBN13,
                 Path = book.Path,
                 RemoteImage = book.RemoteImage,
                 RemoteImageSmall = book.RemoteImage,
@@ -58,7 +70,13 @@ namespace NzbDrone.Api.Series
             return new Core.Models.Book()
             {
                 Title = book.Title,
+                SubTitle = book.SubTitle,
                 Description = book.Description,
+                Language = book.Language,
+                Publisher = book.Publisher,
+                PublishedDate = book.PublishedDate,
+                ISBN10 = book.ISBN10,
+                ISBN13 = book.ISBN13,
                 Path = book.Path,
                 RemoteImage = book.RemoteImage,
                 RemoteImageSmall = book.RemoteImageSmall,
