@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentValidation;
@@ -18,7 +18,7 @@ using NzbDrone.SignalR;
 
 namespace NzbDrone.Api.Series
 {
-    public class SeriesModule : NzbDroneRestModuleWithSignalR<SeriesResource, Core.Tv.Series>, 
+    public class SeriesModule : NzbDroneRestModuleWithSignalR<BookResource, Core.Models.Book>, 
                                 IHandle<EpisodeImportedEvent>, 
                                 IHandle<EpisodeFileDeletedEvent>,
                                 IHandle<SeriesUpdatedEvent>,       
@@ -56,11 +56,11 @@ namespace NzbDrone.Api.Series
 
             _coverMapper = coverMapper;
 
-            GetResourceAll = AllSeries;
-            GetResourceById = GetSeries;
+            GetResourceAll = AllBooks;
             CreateResource = AddSeries;
-            UpdateResource = UpdateSeries;
-            DeleteResource = DeleteSeries;
+            //GetResourceById = GetSeries;
+            //UpdateResource = UpdateSeries;
+            //DeleteResource = DeleteSeries;
 
             //Validation.RuleBuilderExtensions.ValidId(SharedValidator.RuleFor(s => s.ProfileId));
 
@@ -82,50 +82,49 @@ namespace NzbDrone.Api.Series
             PutValidator.RuleFor(s => s.Path).IsValidPath();
         }
 
-        private SeriesResource GetSeries(int id)
+        private BookResource GetSeries(int id)
         {
             var series = _seriesService.GetSeries(id);
             return MapToResource(series);
         }
 
-        private SeriesResource MapToResource(Core.Tv.Series series)
+        private BookResource MapToResource(Core.Models.Book series)
         {
             if (series == null) return null;
 
             var resource = series.ToResource();
-            MapCoversToLocal(resource);
-            FetchAndLinkSeriesStatistics(resource);
-            PopulateAlternateTitles(resource);
+            //MapCoversToLocal(resource);
+            //FetchAndLinkSeriesStatistics(resource);
+            //PopulateAlternateTitles(resource);
 
             return resource;
         }
 
-        private List<SeriesResource> AllSeries()
+        private List<BookResource> AllBooks()
         {
-            var seriesStats = _seriesStatisticsService.SeriesStatistics();
-            var seriesResources = _seriesService.GetAllSeries().ToResource();
+            //var seriesStats = _seriesStatisticsService.SeriesStatistics();
+            var bookResources = _seriesService.GetAllBooks().ToResource();
 
-            MapCoversToLocal(seriesResources.ToArray());
-            LinkSeriesStatistics(seriesResources, seriesStats);
-            PopulateAlternateTitles(seriesResources);
+            //MapCoversToLocal(seriesResources.ToArray());
+            //LinkSeriesStatistics(seriesResources, seriesStats);
+            //PopulateAlternateTitles(seriesResources);
 
-            return seriesResources;
+            return bookResources;
         }
 
-        private int AddSeries(SeriesResource seriesResource)
+        private int AddSeries(BookResource seriesResource)
         {
             var model = seriesResource.ToModel();
-
             return _addSeriesService.AddSeries(model).Id;
         }
 
-        private void UpdateSeries(SeriesResource seriesResource)
+        private void UpdateSeries(BookResource seriesResource)
         {
             var model = seriesResource.ToModel(_seriesService.GetSeries(seriesResource.Id));
 
             _seriesService.UpdateSeries(model);
 
-            BroadcastResourceChange(ModelAction.Updated, seriesResource);
+            //BroadcastResourceChange(ModelAction.Updated, seriesResource);
         }
 
         private void DeleteSeries(int id)
@@ -228,7 +227,7 @@ namespace NzbDrone.Api.Series
 
         public void Handle(SeriesDeletedEvent message)
         {
-            BroadcastResourceChange(ModelAction.Deleted, message.Series.ToResource());
+            //BroadcastResourceChange(ModelAction.Deleted, message.Series.ToResource());
         }
 
         public void Handle(SeriesRenamedEvent message)
