@@ -42,7 +42,7 @@ namespace NzbDrone.Api.Series
                             IMapCoversToLocal coverMapper,
                             RootFolderValidator rootFolderValidator,
                             SeriesPathValidator seriesPathValidator,
-                            SeriesExistsValidator seriesExistsValidator,
+                            BookExistsValidator bookExistsValidator,
                             DroneFactoryValidator droneFactoryValidator,
                             SeriesAncestorValidator seriesAncestorValidator,
                             ProfileExistsValidator profileExistsValidator
@@ -58,7 +58,7 @@ namespace NzbDrone.Api.Series
 
             GetResourceAll = AllBooks;
             CreateResource = AddSeries;
-            //GetResourceById = GetSeries;
+            GetResourceById = GetSeries;
             //UpdateResource = UpdateSeries;
             //DeleteResource = DeleteSeries;
 
@@ -77,7 +77,7 @@ namespace NzbDrone.Api.Series
 
             PostValidator.RuleFor(s => s.Path).IsValidPath().When(s => s.RootFolderPath.IsNullOrWhiteSpace());
             PostValidator.RuleFor(s => s.RootFolderPath).IsValidPath().When(s => s.Path.IsNullOrWhiteSpace());
-            //PostValidator.RuleFor(s => s.TvdbId).GreaterThan(0).SetValidator(seriesExistsValidator);
+            PostValidator.RuleFor(s => s.GoogleID).SetValidator(bookExistsValidator);
 
             PutValidator.RuleFor(s => s.Path).IsValidPath();
         }

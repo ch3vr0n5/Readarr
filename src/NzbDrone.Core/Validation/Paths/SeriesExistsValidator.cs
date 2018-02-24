@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using FluentValidation.Validators;
 using NzbDrone.Core.Tv;
 
 namespace NzbDrone.Core.Validation.Paths
 {
-    public class SeriesExistsValidator : PropertyValidator
+    public class BookExistsValidator : PropertyValidator
     {
         private readonly ISeriesService _seriesService;
 
-        public SeriesExistsValidator(ISeriesService seriesService)
-            : base("This series has already been added")
+        public BookExistsValidator(ISeriesService seriesService)
+            : base("This book has already been added")
         {
             _seriesService = seriesService;
         }
@@ -18,9 +18,8 @@ namespace NzbDrone.Core.Validation.Paths
         {
             if (context.PropertyValue == null) return true;
 
-            var tvdbId = Convert.ToInt32(context.PropertyValue.ToString());
-
-            return (!_seriesService.GetAllSeries().Exists(s => s.TvdbId == tvdbId));
+            var googleID = context.PropertyValue.ToString();
+            return (!_seriesService.GetAllBooks().Exists(s => s.GoogleID == googleID));
         }
     }
 }
