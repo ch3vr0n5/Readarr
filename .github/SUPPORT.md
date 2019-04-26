@@ -1,7 +1,7 @@
 ## Support
 
-There are a number of frequently asked questions that have been answered in our [FAQ](https://github.com/Sonarr/Sonarr/wiki/FAQ)
+Since this is a fork of Sonarr, their frequently asked questions may help [FAQ](https://github.com/Sonarr/Sonarr/wiki/FAQ)
 
-The [wiki](https://github.com/Sonarr/Sonarr/wiki) contains other information and guides
+Also the Sonarr [wiki](https://github.com/Sonarr/Sonarr/wiki) contains other information and guides
 
-If you have a support question, please use the [support forums](https://forums.sonarr.tv/).
+If you have a support question, please create an issue or check out the Readarr [subreddit](https://www.reddit.com/r/Readarr/) for similar issues
