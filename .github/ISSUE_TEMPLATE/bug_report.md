@@ -15,7 +15,6 @@ Link to debug or trace log files.
 
 **System Information**
 
- - Sonarr Version: [e.g. 2.0.0.1]
  - Operating System: [e.g. Windows 10]
  - .net Framework (Windows) or mono (macOS/Linux) Version: [e.g. 4.5 or 5.12]
 
@@ -26,3 +25,5 @@ Link to debug or trace log files.
 
 **Additional context**
 Add any other context about the problem here.
+
+ - Sonarr Version: [e.g. 2.0.0.1]
