@@ -85,7 +85,7 @@ class AddNewSeries extends Component {
     const isFetching = this.state.isFetching;
 
     return (
-      <PageContent title="Add New Series">
+      <PageContent title="Add New Book">
         <PageContentBodyConnector>
           <div className={styles.searchContainer}>
             <div className={styles.searchIconContainer}>
@@ -99,7 +99,7 @@ class AddNewSeries extends Component {
               className={styles.searchInput}
               name="seriesLookup"
               value={term}
-              placeholder="eg. Breaking Bad, tvdb:####"
+              placeholder="eg. Isaac Asimov, isbn:####"
               autoFocus={true}
               onChange={this.onSearchInputChange}
             />
@@ -145,7 +145,7 @@ class AddNewSeries extends Component {
             !isFetching && !error && !items.length && !!term &&
               <div className={styles.message}>
                 <div className={styles.noResults}>Couldn't find any results for '{term}'</div>
-                <div>You can also search using TVDB ID of a show. eg. tvdb:71663</div>
+                <div>You can also search using ISBN of a book.</div>
                 <div>
                   <Link to="https://github.com/Sonarr/Sonarr/wiki/FAQ#why-cant-i-add-a-new-series-when-i-know-the-tvdb-id">
                     Why can't I find my show?
@@ -157,8 +157,8 @@ class AddNewSeries extends Component {
           {
             !term &&
               <div className={styles.message}>
-                <div className={styles.helpText}>It's easy to add a new series, just start typing the name the series you want to add.</div>
-                <div>You can also search using TVDB ID of a show. eg. tvdb:71663</div>
+                <div className={styles.helpText}>It's easy to add a new book, just start typing the name the book you want to add.</div>
+                <div>You can also search using ISBN of a book.</div>
               </div>
           }
 
