@@ -5,7 +5,7 @@ import HeartRating from 'Components/HeartRating';
 import Icon from 'Components/Icon';
 import Label from 'Components/Label';
 import Link from 'Components/Link/Link';
-import SeriesPoster from 'Series/SeriesPoster';
+import SeriesPoster from 'Books/SeriesPoster';
 import AddNewSeriesModal from './AddNewSeriesModal';
 import styles from './AddNewSeriesSearchResult.css';
 

@@ -7,7 +7,7 @@ import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import EpisodeLanguage from 'Episode/EpisodeLanguage';
 import EpisodeQuality from 'Episode/EpisodeQuality';
-import SeriesTitleLink from 'Series/SeriesTitleLink';
+import SeriesTitleLink from 'Books/SeriesTitleLink';
 import BlacklistDetailsModal from './BlacklistDetailsModal';
 import styles from './BlacklistRow.css';
 

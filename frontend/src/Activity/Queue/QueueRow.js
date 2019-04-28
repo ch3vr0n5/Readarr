@@ -14,7 +14,7 @@ import EpisodeLanguage from 'Episode/EpisodeLanguage';
 import EpisodeQuality from 'Episode/EpisodeQuality';
 import SeasonEpisodeNumber from 'Episode/SeasonEpisodeNumber';
 import InteractiveImportModal from 'InteractiveImport/InteractiveImportModal';
-import SeriesTitleLink from 'Series/SeriesTitleLink';
+import SeriesTitleLink from 'Books/SeriesTitleLink';
 import QueueStatusCell from './QueueStatusCell';
 import TimeleftCell from './TimeleftCell';
 import RemoveQueueItemModal from './RemoveQueueItemModal';

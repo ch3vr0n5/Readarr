@@ -8,7 +8,7 @@ import RootFolderSelectInputConnector from 'Components/Form/RootFolderSelectInpu
 import SeriesTypeSelectInput from 'Components/Form/SeriesTypeSelectInput';
 import SpinnerButton from 'Components/Link/SpinnerButton';
 import PageContentFooter from 'Components/Page/PageContentFooter';
-import MoveSeriesModal from 'Series/MoveSeries/MoveSeriesModal';
+import MoveSeriesModal from 'Books/MoveSeries/MoveSeriesModal';
 import TagsModal from './Tags/TagsModal';
 import DeleteSeriesModal from './Delete/DeleteSeriesModal';
 import SeriesEditorFooterLabel from './SeriesEditorFooterLabel';

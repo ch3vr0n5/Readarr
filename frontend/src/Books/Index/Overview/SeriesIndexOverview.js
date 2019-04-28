@@ -7,10 +7,10 @@ import fonts from 'Styles/Variables/fonts';
 import IconButton from 'Components/Link/IconButton';
 import Link from 'Components/Link/Link';
 import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
-import SeriesPoster from 'Series/SeriesPoster';
-import EditSeriesModalConnector from 'Series/Edit/EditSeriesModalConnector';
-import DeleteSeriesModal from 'Series/Delete/DeleteSeriesModal';
-import SeriesIndexProgressBar from 'Series/Index/ProgressBar/SeriesIndexProgressBar';
+import SeriesPoster from 'Books/SeriesPoster';
+import EditSeriesModalConnector from 'Books/Edit/EditSeriesModalConnector';
+import DeleteSeriesModal from 'Books/Delete/DeleteSeriesModal';
+import SeriesIndexProgressBar from 'Books/Index/ProgressBar/SeriesIndexProgressBar';
 import SeriesIndexOverviewInfo from './SeriesIndexOverviewInfo';
 import styles from './SeriesIndexOverview.css';
 

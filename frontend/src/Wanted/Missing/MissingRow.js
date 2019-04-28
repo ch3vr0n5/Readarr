@@ -5,7 +5,7 @@ import EpisodeTitleLink from 'Episode/EpisodeTitleLink';
 import EpisodeStatusConnector from 'Episode/EpisodeStatusConnector';
 import SeasonEpisodeNumber from 'Episode/SeasonEpisodeNumber';
 import EpisodeSearchCellConnector from 'Episode/EpisodeSearchCellConnector';
-import SeriesTitleLink from 'Series/SeriesTitleLink';
+import SeriesTitleLink from 'Books/SeriesTitleLink';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';

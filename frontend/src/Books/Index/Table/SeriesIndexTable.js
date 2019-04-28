@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import getIndexOfFirstCharacter from 'Utilities/Array/getIndexOfFirstCharacter';
 import { sortDirections } from 'Helpers/Props';
 import VirtualTable from 'Components/Table/VirtualTable';
-import SeriesIndexItemConnector from 'Series/Index/SeriesIndexItemConnector';
+import SeriesIndexItemConnector from 'Books/Index/SeriesIndexItemConnector';
 import SeriesIndexHeaderConnector from './SeriesIndexHeaderConnector';
 import SeriesIndexRow from './SeriesIndexRow';
 import styles from './SeriesIndexTable.css';

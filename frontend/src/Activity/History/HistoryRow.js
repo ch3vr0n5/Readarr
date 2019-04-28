@@ -10,7 +10,7 @@ import SeasonEpisodeNumber from 'Episode/SeasonEpisodeNumber';
 import EpisodeTitleLink from 'Episode/EpisodeTitleLink';
 import EpisodeLanguage from 'Episode/EpisodeLanguage';
 import EpisodeQuality from 'Episode/EpisodeQuality';
-import SeriesTitleLink from 'Series/SeriesTitleLink';
+import SeriesTitleLink from 'Books/SeriesTitleLink';
 import HistoryEventTypeCell from './HistoryEventTypeCell';
 import HistoryDetailsModal from './Details/HistoryDetailsModal';
 import styles from './HistoryRow.css';

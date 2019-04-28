@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { kinds } from 'Helpers/Props';
 import Label from 'Components/Label';
-import SeriesPoster from 'Series/SeriesPoster';
+import SeriesPoster from 'Books/SeriesPoster';
 import styles from './SeriesSearchResult.css';
 
 function SeriesSearchResult(props) {

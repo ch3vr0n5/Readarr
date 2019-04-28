@@ -4,8 +4,8 @@ import { icons } from 'Helpers/Props';
 import IconButton from 'Components/Link/IconButton';
 import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
 import VirtualTableRowCell from 'Components/Table/Cells/VirtualTableRowCell';
-import EditSeriesModalConnector from 'Series/Edit/EditSeriesModalConnector';
-import DeleteSeriesModal from 'Series/Delete/DeleteSeriesModal';
+import EditSeriesModalConnector from 'Books/Edit/EditSeriesModalConnector';
+import DeleteSeriesModal from 'Books/Delete/DeleteSeriesModal';
 
 class SeriesIndexActionsCell extends Component {
 

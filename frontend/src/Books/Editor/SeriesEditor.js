@@ -12,7 +12,7 @@ import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import FilterMenu from 'Components/Menu/FilterMenu';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
-import NoSeries from 'Series/NoSeries';
+import NoBooks from 'Books/NoBooks';
 import OrganizeSeriesModal from './Organize/OrganizeSeriesModal';
 import SeriesEditorRowConnector from './SeriesEditorRowConnector';
 import SeriesEditorFooter from './SeriesEditorFooter';
@@ -237,7 +237,7 @@ class SeriesEditor extends Component {
 
           {
             !error && isPopulated && !items.length &&
-              <NoSeries totalItems={totalItems} />
+              <NoBooks totalItems={totalItems} />
           }
         </PageContentBodyConnector>
 

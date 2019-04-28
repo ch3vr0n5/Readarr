@@ -7,8 +7,8 @@ import CheckInput from 'Components/Form/CheckInput';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import TableSelectCell from 'Components/Table/Cells/TableSelectCell';
-import SeriesTitleLink from 'Series/SeriesTitleLink';
-import SeriesStatusCell from 'Series/Index/Table/SeriesStatusCell';
+import SeriesTitleLink from 'Books/SeriesTitleLink';
+import SeriesStatusCell from 'Books/Index/Table/SeriesStatusCell';
 import styles from './SeriesEditorRow.css';
 
 class SeriesEditorRow extends Component {

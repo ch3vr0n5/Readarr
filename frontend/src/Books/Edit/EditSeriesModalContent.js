@@ -11,7 +11,7 @@ import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
 import FormInputGroup from 'Components/Form/FormInputGroup';
-import MoveSeriesModal from 'Series/MoveSeries/MoveSeriesModal';
+import MoveSeriesModal from 'Books/MoveSeries/MoveSeriesModal';
 import styles from './EditSeriesModalContent.css';
 
 class EditSeriesModalContent extends Component {

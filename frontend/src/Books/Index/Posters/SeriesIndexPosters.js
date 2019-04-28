@@ -7,7 +7,7 @@ import hasDifferentItems from 'Utilities/Object/hasDifferentItems';
 import dimensions from 'Styles/Variables/dimensions';
 import { sortDirections } from 'Helpers/Props';
 import Measure from 'Components/Measure';
-import SeriesIndexItemConnector from 'Series/Index/SeriesIndexItemConnector';
+import SeriesIndexItemConnector from 'Books/Index/SeriesIndexItemConnector';
 import SeriesIndexPoster from './SeriesIndexPoster';
 import styles from './SeriesIndexPosters.css';
 

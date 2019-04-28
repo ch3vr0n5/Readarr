@@ -6,7 +6,7 @@ import MonitorToggleButton from 'Components/MonitorToggleButton';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import TableSelectCell from 'Components/Table/Cells/TableSelectCell';
-import SeriesTitleLink from 'Series/SeriesTitleLink';
+import SeriesTitleLink from 'Books/SeriesTitleLink';
 import SeasonPassSeason from './SeasonPassSeason';
 import styles from './SeasonPassRow.css';
 

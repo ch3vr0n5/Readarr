@@ -13,7 +13,7 @@ import ModalHeader from 'Components/Modal/ModalHeader';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import Popover from 'Components/Tooltip/Popover';
-import SeriesPoster from 'Series/SeriesPoster';
+import SeriesPoster from 'Books/SeriesPoster';
 import SeriesMonitoringOptionsPopoverContent from 'AddSeries/SeriesMonitoringOptionsPopoverContent';
 import SeriesTypePopoverContent from 'AddSeries/SeriesTypePopoverContent';
 import styles from './AddNewSeriesModalContent.css';
