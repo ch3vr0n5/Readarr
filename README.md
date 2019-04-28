@@ -1,4 +1,4 @@
-# Sonarr
+# Readarr
 
 Readarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new ebooks and will grab, sort and rename them.
 
@@ -27,7 +27,7 @@ Readarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS fe
 * Make sure all the required software mentioned above are installed
 * Clone the repository into your development machine. [*info*](https://help.github.com/en/articles/working-with-forks)
 * Grab the submodules `git submodule init && git submodule update`
-* Install the required Node Packages `yarn`
+* Install the required Node Packages `yarn -g`
 
 ### Backend Development
 
@@ -47,9 +47,3 @@ Readarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS fe
 
 * [GNU GPL v3](http://www.gnu.org/licenses/gpl.html)
 * Copyright 2010-2019
-
-### Sponsors
-
-* [JetBrains](http://www.jetbrains.com/) for providing us with free licenses to their great tools
-    * [ReSharper](http://www.jetbrains.com/resharper/)
-    * [TeamCity](http://www.jetbrains.com/teamcity/)
