@@ -14,7 +14,7 @@ namespace Sonarr.Api.V3.Series
         private readonly ISearchForNewSeries _searchProxy;
 
         public SeriesLookupModule(ISearchForNewSeries searchProxy)
-            : base("/series/lookup")
+            : base("/books/lookup")
         {
             _searchProxy = searchProxy;
             Get["/"] = x => Search();

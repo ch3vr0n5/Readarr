@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import parseUrl from 'Utilities/String/parseUrl';
-import { lookupSeries, clearAddSeries } from 'Store/Actions/addSeriesActions';
+import { lookupBooks, clearAddSeries } from 'Store/Actions/addSeriesActions';
 import { fetchRootFolders } from 'Store/Actions/rootFolderActions';
 import AddNewSeries from './AddNewSeries';
 
@@ -23,7 +23,7 @@ function createMapStateToProps() {
 }
 
 const mapDispatchToProps = {
-  lookupSeries,
+  lookupBooks,
   clearAddSeries,
   fetchRootFolders
 };
@@ -63,7 +63,7 @@ class AddNewSeriesConnector extends Component {
       this.props.clearAddSeries();
     } else {
       this._seriesLookupTimeout = setTimeout(() => {
-        this.props.lookupSeries({ term });
+        this.props.lookupBooks({ term });
       }, 300);
     }
   }

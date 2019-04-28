@@ -47,7 +47,7 @@ export const persistState = [
 //
 // Actions Types
 
-export const LOOKUP_SERIES = 'addSeries/lookupSeries';
+export const LOOKUP_BOOKS = 'addSeries/lookupSeries';
 export const ADD_SERIES = 'addSeries/addSeries';
 export const SET_ADD_SERIES_VALUE = 'addSeries/setAddSeriesValue';
 export const CLEAR_ADD_SERIES = 'addSeries/clearAddSeries';
@@ -56,7 +56,7 @@ export const SET_ADD_SERIES_DEFAULT = 'addSeries/setAddSeriesDefault';
 //
 // Action Creators
 
-export const lookupSeries = createThunk(LOOKUP_SERIES);
+export const lookupBooks = createThunk(LOOKUP_BOOKS);
 export const addSeries = createThunk(ADD_SERIES);
 export const clearAddSeries = createAction(CLEAR_ADD_SERIES);
 export const setAddSeriesDefault = createAction(SET_ADD_SERIES_DEFAULT);
@@ -73,7 +73,7 @@ export const setAddSeriesValue = createAction(SET_ADD_SERIES_VALUE, (payload) =>
 
 export const actionHandlers = handleThunks({
 
-  [LOOKUP_SERIES]: function(getState, payload, dispatch) {
+  [LOOKUP_BOOKS]: function(getState, payload, dispatch) {
     dispatch(set({ section, isFetching: true }));
 
     if (abortCurrentRequest) {
@@ -81,7 +81,7 @@ export const actionHandlers = handleThunks({
     }
 
     const { request, abortRequest } = createAjaxRequest({
-      url: '/series/lookup',
+      url: '/books/lookup',
       data: {
         term: payload.term
       }
