@@ -8,7 +8,7 @@ import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import FilterMenu from 'Components/Menu/FilterMenu';
-import NoSeries from 'Series/NoSeries';
+import NoBooks from 'Books/NoBooks';
 import CalendarLinkModal from './iCal/CalendarLinkModal';
 import CalendarOptionsModal from './Options/CalendarOptionsModal';
 import LegendConnector from './Legend/LegendConnector';
@@ -87,7 +87,7 @@ class CalendarPage extends Component {
     } = this.state;
 
     const isMeasured = this.state.width > 0;
-    const PageComponent = hasSeries ? CalendarConnector : NoSeries;
+    const PageComponent = hasSeries ? CalendarConnector : NoBooks;
 
     return (
       <PageContent title="Calendar">

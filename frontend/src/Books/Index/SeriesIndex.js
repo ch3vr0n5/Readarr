@@ -12,7 +12,7 @@ import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
-import NoSeries from 'Series/NoSeries';
+import NoBooks from 'Books/NoBooks';
 import SeriesIndexTableConnector from './Table/SeriesIndexTableConnector';
 import SeriesIndexTableOptionsConnector from './Table/SeriesIndexTableOptionsConnector';
 import SeriesIndexPosterOptionsModal from './Posters/Options/SeriesIndexPosterOptionsModal';
@@ -336,7 +336,7 @@ class SeriesIndex extends Component {
 
             {
               !error && isPopulated && !items.length &&
-                <NoSeries totalItems={totalItems} />
+                <NoBooks totalItems={totalItems} />
             }
           </PageContentBodyConnector>
 

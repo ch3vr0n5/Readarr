@@ -12,7 +12,7 @@ import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import FilterMenu from 'Components/Menu/FilterMenu';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
-import NoSeries from 'Series/NoSeries';
+import NoBooks from 'Books/NoBooks';
 import SeasonPassFilterModalConnector from './SeasonPassFilterModalConnector';
 import SeasonPassFooter from './SeasonPassFooter';
 import SeasonPassRowConnector from './SeasonPassRowConnector';
@@ -181,7 +181,7 @@ class SeasonPass extends Component {
 
           {
             !error && isPopulated && !items.length &&
-              <NoSeries totalItems={totalItems} />
+              <NoBooks totalItems={totalItems} />
           }
         </PageContentBodyConnector>
 

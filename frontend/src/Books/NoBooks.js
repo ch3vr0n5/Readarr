@@ -2,16 +2,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { kinds } from 'Helpers/Props';
 import Button from 'Components/Link/Button';
-import styles from './NoSeries.css';
+import styles from './NoBooks.css';
 
-function NoSeries(props) {
+function NoBooks(props) {
   const { totalItems } = props;
 
   if (totalItems > 0) {
     return (
       <div>
         <div className={styles.message}>
-        All series are hidden due to the applied filter.
+        All books are hidden due to the applied filter.
         </div>
       </div>
     );
@@ -20,7 +20,7 @@ function NoSeries(props) {
   return (
     <div>
       <div className={styles.message}>
-        No series found, to get started you'll want to add a new series or import some existing ones.
+        No books found, to get started you'll want to add a new book or import some existing ones.
       </div>
 
       <div className={styles.buttonContainer}>
@@ -28,7 +28,7 @@ function NoSeries(props) {
           to="/add/import"
           kind={kinds.PRIMARY}
         >
-          Import Existing Series
+          Import Existing Books
         </Button>
       </div>
 
@@ -37,15 +37,15 @@ function NoSeries(props) {
           to="/add/new"
           kind={kinds.PRIMARY}
         >
-          Add New Series
+          Add New Book
         </Button>
       </div>
     </div>
   );
 }
 
-NoSeries.propTypes = {
+NoBooks.propTypes = {
   totalItems: PropTypes.number.isRequired
 };
 
-export default NoSeries;
+export default NoBooks;
