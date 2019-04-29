@@ -1,6 +1,9 @@
 ---
 name: Bug report
-about: Create a report to help us improve Sonarr
+about: Create a report to help us improve
+title: ''
+labels: bug
+assignees: ''
 
 ---
 
@@ -14,7 +17,6 @@ If applicable, add screenshots to help explain your problem.
 Link to debug or trace log files.
 
 **System Information**
-
  - Operating System: [e.g. Windows 10]
  - .net Framework (Windows) or mono (macOS/Linux) Version: [e.g. 4.5 or 5.12]
 
@@ -22,8 +24,7 @@ Link to debug or trace log files.
  - OS: [e.g. Windows]
  - Browser: [e.g. chrome, firefox]
  - Version: [e.g. 22]
+ - Readarr Version: [e.g. 2.0.0.1]
 
 **Additional context**
 Add any other context about the problem here.
-
- - Sonarr Version: [e.g. 2.0.0.1]
