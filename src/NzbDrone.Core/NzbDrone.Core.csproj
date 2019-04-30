@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -780,6 +780,7 @@
     <Compile Include="Languages\LanguagesBelowCutoff.cs" />
     <Compile Include="MediaFiles\EpisodeImport\Aggregation\Aggregators\AggregateLanguage.cs" />
     <Compile Include="MediaFiles\EpisodeImport\Specifications\AbsoluteEpisodeNumberSpecification.cs" />
+    <Compile Include="MetadataSource\SkyHook\Resource\BookResource.cs" />
     <Compile Include="Notifications\Discord\Discord.cs" />
     <Compile Include="Notifications\Discord\DiscordColors.cs" />
     <Compile Include="Notifications\Discord\DiscordException.cs" />

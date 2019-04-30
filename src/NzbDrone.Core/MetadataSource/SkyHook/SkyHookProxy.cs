@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -65,41 +65,18 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             {
                 var lowerTitle = title.ToLowerInvariant();
 
-                if (lowerTitle.StartsWith("tvdb:") || lowerTitle.StartsWith("tvdbid:"))
+                if(lowerTitle.StartsWith(":isbn"))
                 {
-                    var slug = lowerTitle.Split(':')[1].Trim();
-
-                    int tvdbId;
-
-                    if (slug.IsNullOrWhiteSpace() || slug.Any(char.IsWhiteSpace) || !int.TryParse(slug, out tvdbId) || tvdbId <= 0)
-                    {
-                        return new List<Series>();
-                    }
-
-                    try
-                    {
-                        var existingSeries = _seriesService.FindByTvdbId(tvdbId);
-                        if (existingSeries != null)
-                        {
-                            return new List<Series> { existingSeries };
-                        }
-
-                        return new List<Series> { GetSeriesInfo(tvdbId).Item1 };
-                    }
-                    catch (SeriesNotFoundException)
-                    {
-                        return new List<Series>();
-                    }
+                    //TODO: Add ISBN option
                 }
 
                 var httpRequest = _requestBuilder.Create()
-                                                 .SetSegment("route", "search")
-                                                 .AddQueryParam("term", title.ToLower().Trim())
+                                                 .AddQueryParam("q", title.ToLower().Trim())
                                                  .Build();
 
-                var httpResponse = _httpClient.Get<List<ShowResource>>(httpRequest);
+                var httpResponse = _httpClient.Get<List<BookResource>>(httpRequest);
 
-                return httpResponse.Resource.SelectList(MapSearhResult);
+                return httpResponse.Resource.SelectList(MapSearchResult);
             }
             catch (HttpException)
             {
@@ -112,22 +89,25 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             }
         }
 
-        private Series MapSearhResult(ShowResource show)
+        private Series MapSearchResult(BookResource show)
         {
-            var series = _seriesService.FindByTvdbId(show.TvdbId);
+            /*var series = _seriesService.FindByTvdbId(show.TvdbId);
 
             if (series == null)
             {
                 series = MapSeries(show);
             }
 
-            return series;
+            return series;*/
+
+            //TODO: Check for existing
+            //TODO: Do below but for books..
+
+            return null;
         }
 
         private Series MapSeries(ShowResource show)
         {
-
-
             var series = new Series();
             series.TvdbId = show.TvdbId;
 
