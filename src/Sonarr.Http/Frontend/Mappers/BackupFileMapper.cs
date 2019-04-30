@@ -9,7 +9,6 @@ namespace Sonarr.Http.Frontend.Mappers
     public class BackupFileMapper : StaticResourceMapperBase
     {
         private readonly IBackupService _backupService;
-        private readonly IAppFolderInfo _appFolderInfo;
 
         public BackupFileMapper(IBackupService backupService, IDiskProvider diskProvider, Logger logger)
             : base(diskProvider, logger)

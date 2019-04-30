@@ -14,7 +14,6 @@ namespace NzbDrone.Core.Test.OrganizerTests.FileNameBuilderTests
     {
         private Series _series;
         private Episode _episode;
-        private EpisodeFile _episodeFile;
         private NamingConfig _namingConfig;
 
         [SetUp]
