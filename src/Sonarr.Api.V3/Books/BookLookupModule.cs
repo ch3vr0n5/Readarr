@@ -11,9 +11,9 @@ namespace Sonarr.Api.V3.Series
 {
     public class SeriesLookupModule : SonarrRestModule<SeriesResource>
     {
-        private readonly ISearchForNewSeries _searchProxy;
+        private readonly ISearchForNewBooks _searchProxy;
 
-        public SeriesLookupModule(ISearchForNewSeries searchProxy)
+        public SeriesLookupModule(ISearchForNewBooks searchProxy)
             : base("/books/lookup")
         {
             _searchProxy = searchProxy;
@@ -23,7 +23,7 @@ namespace Sonarr.Api.V3.Series
 
         private Response Search()
         {
-            var tvDbResults = _searchProxy.SearchForNewSeries((string)Request.Query.term);
+            var tvDbResults = _searchProxy.SearchForNewBooks((string)Request.Query.term);
             return MapToResource(tvDbResults).AsResponse();
         }
 

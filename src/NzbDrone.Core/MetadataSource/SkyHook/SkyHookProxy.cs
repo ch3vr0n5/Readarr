@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -14,7 +14,7 @@ using NzbDrone.Core.Tv;
 
 namespace NzbDrone.Core.MetadataSource.SkyHook
 {
-    public class SkyHookProxy : IProvideSeriesInfo, ISearchForNewSeries
+    public class SkyHookProxy : IProvideSeriesInfo, ISearchForNewBooks
     {
         private readonly IHttpClient _httpClient;
         private readonly Logger _logger;
@@ -60,7 +60,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             return new Tuple<Series, List<Episode>>(series, episodes.ToList());
         }
 
-        public List<Series> SearchForNewSeries(string title)
+        public List<Series> SearchForNewBooks(string title)
         {
             try
             {

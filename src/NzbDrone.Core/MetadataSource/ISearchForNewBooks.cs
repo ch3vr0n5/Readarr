@@ -3,8 +3,8 @@ using NzbDrone.Core.Tv;
 
 namespace NzbDrone.Core.MetadataSource
 {
-    public interface ISearchForNewSeries
+    public interface ISearchForNewBooks
     {
-        List<Series> SearchForNewSeries(string title);
+        List<Series> SearchForNewBooks(string title);
     }
 }
