@@ -24,10 +24,9 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
         public SkyHookProxy(IHttpClient httpClient, ISonarrCloudRequestBuilder requestBuilder, ISeriesService seriesService, Logger logger)
         {
             _httpClient = httpClient;
-             _requestBuilder = requestBuilder.SkyHookTvdb;
             _logger = logger;
             _seriesService = seriesService;
-            _requestBuilder = requestBuilder.SkyHookTvdb;
+            _requestBuilder = requestBuilder.GoogleBooksAPI;
         }
 
         public Tuple<Series, List<Episode>> GetSeriesInfo(int tvdbSeriesId)
