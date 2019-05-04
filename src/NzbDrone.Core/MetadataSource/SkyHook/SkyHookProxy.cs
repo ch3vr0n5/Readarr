@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -65,13 +65,15 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             {
                 var lowerTitle = title.ToLowerInvariant();
 
-                if(lowerTitle.StartsWith(":isbn"))
-                {
-                    //TODO: Add ISBN option
-                }
+                //Google search options
+                var filters = new[] { "isbn:", "inauthor:", "inpublisher:" };
+
+                //If a filter was used but it's not in the list then error out
+                if(!filters.Where(a => lowerTitle.Contains(a)).Any() && lowerTitle.Contains(":"))
+                    throw new SkyHookException("Invalid filter used when searching.");
 
                 var httpRequest = _requestBuilder.Create()
-                                                 .AddQueryParam("q", title.ToLower().Trim())
+                                                 .AddQueryParam("q", lowerTitle.Trim())
                                                  .Build();
 
                 var httpResponse = _httpClient.Get<List<BookResource>>(httpRequest);
