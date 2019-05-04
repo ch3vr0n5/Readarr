@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace NzbDrone.Core.MetadataSource.SkyHook.Resource
 {
-    public class BookResource
+    public class VolumeResource
     {
         public string kind { get; set; }
         public int totalItems { get; set; }
-        public List<Item> items { get; set; }
+        public List<VolumeItem> items { get; set; }
     }
 
     public class IndustryIdentifier
@@ -125,7 +125,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.Resource
         public string textSnippet { get; set; }
     }
 
-    public class Item
+    public class VolumeItem
     {
         public string kind { get; set; }
         public string id { get; set; }
