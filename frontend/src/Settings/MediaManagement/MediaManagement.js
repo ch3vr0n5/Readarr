@@ -13,10 +13,22 @@ import FormInputGroup from 'Components/Form/FormInputGroup';
 import RootFoldersConnector from 'RootFolder/RootFoldersConnector';
 import NamingConnector from './Naming/NamingConnector';
 
+const episodeTitleRequiredOptions = [
+  { key: 'always', value: 'Always' },
+  { key: 'bulkSeasonReleases', value: 'Only for Bulk Season Releases' },
+  { key: 'never', value: 'Never' }
+];
+
 const rescanAfterRefreshOptions = [
   { key: 'always', value: 'Always' },
   { key: 'afterManual', value: 'After Manual Refresh' },
   { key: 'never', value: 'Never' }
+];
+
+const downloadPropersAndRepacksOptions = [
+  { key: 'preferAndUpgrade', value: 'Prefer and Upgrade' },
+  { key: 'doNotUpgrade', value: 'Do not Upgrade Automatically' },
+  { key: 'doNotPrefer', value: 'Do not Prefer' }
 ];
 
 const fileDateOptions = [
@@ -116,6 +128,23 @@ class MediaManagement extends Component {
                     <FieldSet
                       legend="Importing"
                     >
+                      <FormGroup
+                        advancedSettings={advancedSettings}
+                        isAdvanced={true}
+                        size={sizes.SMALL}
+                      >
+                        <FormLabel>Episode Title Required</FormLabel>
+
+                        <FormInputGroup
+                          type={inputTypes.SELECT}
+                          name="episodeTitleRequired"
+                          helpText="Prevent importing for up to 24 hours if the episode title is in the naming format and the episode title is TBA"
+                          values={episodeTitleRequiredOptions}
+                          onChange={onInputChange}
+                          {...settings.episodeTitleRequired}
+                        />
+                      </FormGroup>
+
                       {
                         isMono &&
                           <FormGroup
@@ -204,14 +233,23 @@ class MediaManagement extends Component {
                     isAdvanced={true}
                     size={sizes.MEDIUM}
                   >
-                    <FormLabel>Download Propers</FormLabel>
+                    <FormLabel>Propers and Repacks</FormLabel>
 
                     <FormInputGroup
-                      type={inputTypes.CHECK}
-                      name="autoDownloadPropers"
-                      helpText="Should Sonarr automatically upgrade to propers when available?"
+                      type={inputTypes.SELECT}
+                      name="downloadPropersAndRepacks"
+                      helpTexts={[
+                        'Whether or not to automatically upgrade to Propers/Repacks',
+                        'Use \'Do not Prefer\' to sort by preferred word score over propers/repacks'
+                      ]}
+                      helpTextWarning={
+                        settings.downloadPropersAndRepacks.value === 'doNotPrefer' ?
+                          'Use preferred words for automatic upgrades to propers/repacks' :
+                          undefined
+                      }
+                      values={downloadPropersAndRepacksOptions}
                       onChange={onInputChange}
-                      {...settings.autoDownloadPropers}
+                      {...settings.downloadPropersAndRepacks}
                     />
                   </FormGroup>
 

@@ -94,6 +94,9 @@ class Tooltip extends Component {
         <Portal>
           <Popper
             placement={position}
+            // Disable events to improve performance when many tooltips
+            // are shown (Quality Definitions for example).
+            eventsEnabled={false}
             modifiers={{
               preventOverflow: {
               // Fixes positioning for tooltips in the queue
@@ -102,7 +105,7 @@ class Tooltip extends Component {
               }
             }}
           >
-            {({ ref, style, scheduleUpdate }) => {
+            {({ ref, style, placement, scheduleUpdate }) => {
               this._scheduleUpdate = scheduleUpdate;
 
               return (
@@ -125,7 +128,7 @@ class Tooltip extends Component {
                           className={classNames(
                             styles.arrow,
                             styles[kind],
-                            styles[position]
+                            styles[placement.split('-')[0]]
                           )}
                         />
 

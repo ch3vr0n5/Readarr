@@ -1,5 +1,7 @@
 using NzbDrone.Core.Configuration;
 using NzbDrone.Core.MediaFiles;
+using NzbDrone.Core.MediaFiles.EpisodeImport;
+using NzbDrone.Core.Qualities;
 using Sonarr.Http.REST;
 
 namespace Sonarr.Api.V3.Config
@@ -8,7 +10,7 @@ namespace Sonarr.Api.V3.Config
     {
         public bool AutoUnmonitorPreviouslyDownloadedEpisodes { get; set; }
         public string RecycleBin { get; set; }
-        public bool AutoDownloadPropers { get; set; }
+        public ProperDownloadTypes DownloadPropersAndRepacks { get; set; }
         public bool CreateEmptySeriesFolders { get; set; }
         public bool DeleteEmptyFolders { get; set; }
         public FileDateType FileDate { get; set; }
@@ -20,6 +22,7 @@ namespace Sonarr.Api.V3.Config
         public string ChownUser { get; set; }
         public string ChownGroup { get; set; }
 
+        public EpisodeTitleRequiredType EpisodeTitleRequired { get; set; }
         public bool SkipFreeSpaceCheckWhenImporting { get; set; }
         public bool CopyUsingHardlinks { get; set; }
         public bool ImportExtraFiles { get; set; }
@@ -35,7 +38,7 @@ namespace Sonarr.Api.V3.Config
             {
                 AutoUnmonitorPreviouslyDownloadedEpisodes = model.AutoUnmonitorPreviouslyDownloadedEpisodes,
                 RecycleBin = model.RecycleBin,
-                AutoDownloadPropers = model.AutoDownloadPropers,
+                DownloadPropersAndRepacks = model.DownloadPropersAndRepacks,
                 CreateEmptySeriesFolders = model.CreateEmptySeriesFolders,
                 DeleteEmptyFolders = model.DeleteEmptyFolders,
                 FileDate = model.FileDate,
@@ -47,6 +50,7 @@ namespace Sonarr.Api.V3.Config
                 ChownUser = model.ChownUser,
                 ChownGroup = model.ChownGroup,
 
+                EpisodeTitleRequired = model.EpisodeTitleRequired,
                 SkipFreeSpaceCheckWhenImporting = model.SkipFreeSpaceCheckWhenImporting,
                 CopyUsingHardlinks = model.CopyUsingHardlinks,
                 ImportExtraFiles = model.ImportExtraFiles,

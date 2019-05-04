@@ -159,6 +159,8 @@
     <Compile Include="Datastore\SqliteSchemaDumperTests\SqliteSchemaDumperFixture.cs" />
     <Compile Include="DecisionEngineTests\AcceptableSizeSpecificationFixture.cs" />
     <Compile Include="DecisionEngineTests\AnimeVersionUpgradeSpecificationFixture.cs" />
+    <Compile Include="DecisionEngineTests\RepackSpecificationFixture.cs" />
+    <Compile Include="DecisionEngineTests\MultiSeasonSpecificationFixture.cs" />
     <Compile Include="DecisionEngineTests\UpgradeAllowedSpecificationFixture .cs" />
     <Compile Include="DecisionEngineTests\FullSeasonSpecificationFixture.cs" />
     <Compile Include="DecisionEngineTests\MaximumSizeSpecificationFixture.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="HealthCheck\Checks\MonoDebugFixture.cs" />
     <Compile Include="HealthCheck\Checks\MonoVersionCheckFixture.cs" />
     <Compile Include="HealthCheck\Checks\IndexerStatusCheckFixture.cs" />
+    <Compile Include="HealthCheck\Checks\SystemTimeCheckFixture.cs" />
     <Compile Include="HealthCheck\Checks\RootFolderCheckFixture.cs" />
     <Compile Include="HealthCheck\Checks\UpdateCheckFixture.cs" />
     <Compile Include="HealthCheck\HealthCheckFixture.cs" />
