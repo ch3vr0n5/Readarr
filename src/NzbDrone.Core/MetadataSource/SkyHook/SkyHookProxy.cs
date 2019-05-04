@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -7,6 +7,7 @@ using NLog;
 using NzbDrone.Common.Cloud;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Http;
+using NzbDrone.Core.Books;
 using NzbDrone.Core.Exceptions;
 using NzbDrone.Core.MediaCover;
 using NzbDrone.Core.MetadataSource.SkyHook.Resource;
@@ -59,7 +60,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             return new Tuple<Series, List<Episode>>(series, episodes.ToList());
         }
 
-        public List<Series> SearchForNewBooks(string title)
+        public List<Book> SearchForNewBooks(string title)
         {
             try
             {
@@ -76,9 +77,9 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
                                                  .AddQueryParam("q", lowerTitle.Trim())
                                                  .Build();
 
-                var httpResponse = _httpClient.Get<List<BookResource>>(httpRequest);
+                var httpResponse = _httpClient.Get<List<VolumeResource>>(httpRequest);
 
-                return httpResponse.Resource.SelectList(MapSearchResult);
+                return httpResponse.Resource.SelectMany(MapSearchResult).ToList();
             }
             catch (HttpException)
             {
@@ -91,7 +92,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             }
         }
 
-        private Series MapSearchResult(BookResource show)
+        private List<Book> MapSearchResult(VolumeResource volume)
         {
             /*var series = _seriesService.FindByTvdbId(show.TvdbId);
 
@@ -102,10 +103,15 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
 
             return series;*/
 
-            //TODO: Check for existing
-            //TODO: Do below but for books..
-
-            return null;
+            return volume.items.SelectList(MapBook);
+        }
+        
+        private Book MapBook(VolumeItem volume)
+        {
+            var book = new Book();
+            book.Title = volume.volumeInfo.title;
+            book.SubTitle = volume.volumeInfo.subtitle;
+            return book;
         }
 
         private Series MapSeries(ShowResource show)
