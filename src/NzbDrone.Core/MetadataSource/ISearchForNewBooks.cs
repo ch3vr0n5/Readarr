@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using NzbDrone.Core.Tv;
+using NzbDrone.Core.Books;
 
 namespace NzbDrone.Core.MetadataSource
 {
     public interface ISearchForNewBooks
     {
-        List<Series> SearchForNewBooks(string title);
+        List<Book> SearchForNewBooks(string title);
     }
 }

@@ -125,6 +125,7 @@
     <Compile Include="Blacklisting\BlacklistRepository.cs" />
     <Compile Include="Blacklisting\BlacklistService.cs" />
     <Compile Include="Blacklisting\ClearBlacklistCommand.cs" />
+    <Compile Include="Books\Author.cs" />
     <Compile Include="Books\Book.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ConfigFileProvider.cs" />
@@ -787,7 +788,7 @@
     <Compile Include="MediaFiles\EpisodeImport\Aggregation\Aggregators\AggregateLanguage.cs" />
     <Compile Include="MediaFiles\EpisodeImport\EpisodeTitleRequiredType.cs" />
     <Compile Include="MediaFiles\EpisodeImport\Specifications\AbsoluteEpisodeNumberSpecification.cs" />
-    <Compile Include="MetadataSource\SkyHook\Resource\BookResource.cs" />
+    <Compile Include="MetadataSource\SkyHook\Resource\VolumeResource.cs" />
     <Compile Include="Notifications\Discord\Discord.cs" />
     <Compile Include="Notifications\Discord\DiscordColors.cs" />
     <Compile Include="Notifications\Discord\DiscordException.cs" />
