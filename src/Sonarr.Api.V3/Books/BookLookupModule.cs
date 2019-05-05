@@ -4,12 +4,13 @@ using Nancy;
 using NzbDrone.Core.MediaCover;
 using NzbDrone.Core.MetadataSource;
 using NzbDrone.Core.SeriesStats;
+using Sonarr.Api.V3.Books;
 using Sonarr.Http;
 using Sonarr.Http.Extensions;
 
 namespace Sonarr.Api.V3.Series
 {
-    public class SeriesLookupModule : SonarrRestModule<SeriesResource>
+    public class SeriesLookupModule : SonarrRestModule<BookResource>
     {
         private readonly ISearchForNewBooks _searchProxy;
 
@@ -20,26 +21,23 @@ namespace Sonarr.Api.V3.Series
             Get["/"] = x => Search();
         }
 
-
         private Response Search()
         {
             var tvDbResults = _searchProxy.SearchForNewBooks((string)Request.Query.term);
             return MapToResource(tvDbResults).AsResponse();
         }
 
-
-        private static IEnumerable<SeriesResource> MapToResource(IEnumerable<NzbDrone.Core.Tv.Series> series)
+        private static IEnumerable<BookResource> MapToResource(IEnumerable<NzbDrone.Core.Books.Book> books)
         {
-            foreach (var currentSeries in series)
+            foreach (var currentBook in books)
             {
-                var resource = currentSeries.ToResource();
-                var poster = currentSeries.Images.FirstOrDefault(c => c.CoverType == MediaCoverTypes.Poster);
-                if (poster != null)
-                {
-                    resource.RemotePoster = poster.Url;
-                }
+                var resource = currentBook.ToResource();
 
-                resource.Statistics = new SeriesStatistics().ToResource(resource.Seasons);
+                //var poster = currentBook.Images.FirstOrDefault(c => c.CoverType == MediaCoverTypes.Poster);
+                //if (poster != null)
+                //   resource.RemotePoster = poster.Url;
+
+                //resource.Statistics = new SeriesStatistics().ToResource(resource.Seasons);
 
                 yield return resource;
             }
