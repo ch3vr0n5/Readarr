@@ -77,9 +77,9 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
                                                  .AddQueryParam("q", lowerTitle.Trim())
                                                  .Build();
 
-                var httpResponse = _httpClient.Get<List<VolumeResource>>(httpRequest);
+                var httpResponse = _httpClient.Get<VolumeResource>(httpRequest);
 
-                return httpResponse.Resource.SelectMany(MapSearchResult).ToList();
+                return MapSearchResult(httpResponse.Resource);
             }
             catch (HttpException)
             {
@@ -109,8 +109,13 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
         private Book MapBook(VolumeItem volume)
         {
             var book = new Book();
+            book.ISBN = volume.volumeInfo.industryIdentifiers.Where(a => a.type == "ISBN_13").Select(a => Convert.ToInt32(a.identifier)).FirstOrDefault();
             book.Title = volume.volumeInfo.title;
             book.SubTitle = volume.volumeInfo.subtitle;
+            book.Overview = volume.volumeInfo.description;
+            book.Monitored = true;
+
+            
             return book;
         }
 

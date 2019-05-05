@@ -16,8 +16,10 @@ namespace NzbDrone.Core.Books
             Authors = new List<Author>();
         }
 
+        public int ISBN { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
+        public string Overview { get; set; }
 
         public bool Monitored { get; set; }
         public List<MediaCover.MediaCover> Images { get; set; }
@@ -27,5 +29,12 @@ namespace NzbDrone.Core.Books
         public List<Author> Authors { get; set; }
         public string RootFolderPath { get; set; }
         public DateTime Added { get; set; }
+
+        public void ApplyChanges(Book otherBook)
+        {
+            Path = otherBook.Path;
+            Monitored = otherBook.Monitored;
+            RootFolderPath = otherBook.RootFolderPath;
+        }
     }
 }
