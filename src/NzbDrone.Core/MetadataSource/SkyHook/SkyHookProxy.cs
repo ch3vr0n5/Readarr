@@ -114,9 +114,23 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             book.SubTitle = volume.volumeInfo.subtitle;
             book.Overview = volume.volumeInfo.description;
             book.Monitored = true;
-
+            book.Ratings = MapRatings(volume.volumeInfo);
             
             return book;
+        }
+
+        private static Ratings MapRatings(VolumeInfo info)
+        {
+            if (info.ratingsCount == null || info.averageRating == null)
+            {
+                return new Ratings();
+            }
+
+            return new Ratings
+            {
+                Votes = (int)info.ratingsCount,
+                Value = (int)info.averageRating
+            };
         }
 
         private Series MapSeries(ShowResource show)
@@ -161,7 +175,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
 
             series.TitleSlug = show.Slug;
             series.Status = MapSeriesStatus(show.Status);
-            series.Ratings = MapRatings(show.Rating);
+            //series.Ratings = MapRatings(show.Rating);
             series.Genres = show.Genres;
 
             if (show.ContentRating.IsNotNullOrWhiteSpace())
@@ -237,20 +251,6 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             }
 
             return SeriesStatusType.Continuing;
-        }
-
-        private static Ratings MapRatings(RatingResource rating)
-        {
-            if (rating == null)
-            {
-                return new Ratings();
-            }
-
-            return new Ratings
-            {
-                Votes = rating.Count,
-                Value = rating.Value
-            };
         }
 
         private static MediaCover.MediaCover MapImage(ImageResource arg)
