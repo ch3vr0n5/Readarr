@@ -4,6 +4,7 @@ using NUnit.Framework;
 using NzbDrone.Core.MetadataSource.SkyHook;
 using NzbDrone.Core.Test.Framework;
 using NzbDrone.Core.Tv;
+using NzbDrone.Core.Books;
 using NzbDrone.Test.Common;
 using NzbDrone.Test.Common.Categories;
 
@@ -19,20 +20,12 @@ namespace NzbDrone.Core.Test.MetadataSource.SkyHook
             UseRealHttp();
         }
 
-        [TestCase("The Simpsons", "The Simpsons")]
-        [TestCase("South Park", "South Park")]
-        [TestCase("Franklin & Bash", "Franklin & Bash")]
-        [TestCase("House", "House")]
-        [TestCase("Mr. D", "Mr. D")]
-        [TestCase("Rob & Big", "Rob & Big")]
-        [TestCase("M*A*S*H", "M*A*S*H")]
-        //[TestCase("imdb:tt0436992", "Doctor Who (2005)")]
-        [TestCase("tvdb:78804", "Doctor Who (2005)")]
-        [TestCase("tvdbid:78804", "Doctor Who (2005)")]
-        [TestCase("tvdbid: 78804 ", "Doctor Who (2005)")]
+        [TestCase("A Feast for Crows", "A Feast for Crows")]
+        [TestCase("isbn:9780007378425", "A Game of Thrones (A Song of Ice and Fire, Book 1)")]
+        [TestCase("isbn: 9780007378425 ", "A Game of Thrones (A Song of Ice and Fire, Book 1)")]
         public void successful_search(string title, string expected)
         {
-            var result = Subject.SearchForNewSeries(title);
+            var result = Subject.SearchForNewBooks(title);
 
             result.Should().NotBeEmpty();
 
@@ -41,36 +34,36 @@ namespace NzbDrone.Core.Test.MetadataSource.SkyHook
             ExceptionVerification.IgnoreWarns();
         }
 
-        [TestCase("tvdbid:")]
-        [TestCase("tvdbid: 99999999999999999999")]
-        [TestCase("tvdbid: 0")]
-        [TestCase("tvdbid: -12")]
-        [TestCase("tvdbid:289578")]
+        [TestCase("isbn:")]
+        [TestCase("isbn: 99999999999999999999")]
+        [TestCase("isbn: 0")]
+        [TestCase("isbn: -12")]
+        [TestCase("isbn:289578")]
         [TestCase("adjalkwdjkalwdjklawjdlKAJD")]
         public void no_search_result(string term)
         {
-            var result = Subject.SearchForNewSeries(term);
+            var result = Subject.SearchForNewBooks(term);
             result.Should().BeEmpty();
 
             ExceptionVerification.IgnoreWarns();
         }
 
-        [TestCase("tvdbid:78804")]
-        [TestCase("Doctor Who")]
+        [TestCase("isbn:9780007378425")]
+        [TestCase("A Game of Thrones")]
         public void should_return_existing_series_if_found(string term)
         {
-            const int tvdbId = 78804;
-            var existingSeries = new Series
+            const long isbn = 9780007378425;
+            var existingSeries = new Book
             {
-                TvdbId = tvdbId
+                ISBN = isbn
             };
             
-            Mocker.GetMock<ISeriesService>().Setup(c => c.FindByTvdbId(tvdbId)).Returns(existingSeries);
+            Mocker.GetMock<ISeriesService>().Setup(c => c.FindByTvdbId(isbn)).Returns(existingSeries);
 
-            var result = Subject.SearchForNewSeries("tvdbid: " + tvdbId);
+            var result = Subject.SearchForNewBooks("isbn: " + isbn);
 
             result.Should().Contain(existingSeries);
-            result.Should().ContainSingle(c => c.TvdbId == tvdbId);
+            result.Should().ContainSingle(c => c.ISBN == isbn);
 
         }
     }
