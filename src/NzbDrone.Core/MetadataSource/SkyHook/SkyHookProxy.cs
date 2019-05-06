@@ -109,7 +109,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
         private Book MapBook(VolumeItem volume)
         {
             var book = new Book();
-            book.ISBN = volume.volumeInfo.industryIdentifiers.Where(a => a.type == "ISBN_13").Select(a => Convert.ToInt32(a.identifier)).FirstOrDefault();
+            book.ISBN = volume.volumeInfo.industryIdentifiers.Where(a => a.type == "ISBN_13").Select(a => Convert.ToInt64(a.identifier)).FirstOrDefault();
             book.Title = volume.volumeInfo.title;
             book.SubTitle = volume.volumeInfo.subtitle;
             book.Overview = volume.volumeInfo.description;
