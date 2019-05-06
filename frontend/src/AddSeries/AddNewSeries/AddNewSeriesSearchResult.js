@@ -44,7 +44,7 @@ class AddNewSeriesSearchResult extends Component {
 
   render() {
     const {
-      tvdbId,
+      ISBN,
       title,
       titleSlug,
       year,

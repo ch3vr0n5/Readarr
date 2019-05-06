@@ -16,7 +16,7 @@ namespace NzbDrone.Core.Books
             Authors = new List<Author>();
         }
 
-        public int ISBN { get; set; }
+        public long ISBN { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string Overview { get; set; }
@@ -32,6 +32,7 @@ namespace NzbDrone.Core.Books
 
         public void ApplyChanges(Book otherBook)
         {
+            ISBN = otherBook.ISBN;
             Path = otherBook.Path;
             Monitored = otherBook.Monitored;
             RootFolderPath = otherBook.RootFolderPath;

@@ -132,7 +132,7 @@ class AddNewSeries extends Component {
                   items.map((item) => {
                     return (
                       <AddNewSeriesSearchResultConnector
-                        key={item.tvdbId}
+                        key={item.ISBN}
                         {...item}
                       />
                     );

@@ -12,6 +12,7 @@ namespace Sonarr.Api.V3.Books
 {
     public class BookResource : RestResource
     {
+        public long ISBN { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
 
@@ -34,6 +35,7 @@ namespace Sonarr.Api.V3.Books
             return new BookResource
             {
                 Id = model.Id,
+                ISBN = model.ISBN,
                 Title = model.Title
             };
         }
@@ -45,6 +47,7 @@ namespace Sonarr.Api.V3.Books
             return new NzbDrone.Core.Books.Book
             {
                 Id = resource.Id,
+                ISBN = resource.ISBN,
                 Title = resource.Title,
             };
         }
