@@ -94,7 +94,7 @@ class AddNewSeriesConnector extends Component {
 
 AddNewSeriesConnector.propTypes = {
   term: PropTypes.string,
-  lookupSeries: PropTypes.func.isRequired,
+  lookupBooks: PropTypes.func.isRequired,
   clearAddSeries: PropTypes.func.isRequired,
   fetchRootFolders: PropTypes.func.isRequired
 };

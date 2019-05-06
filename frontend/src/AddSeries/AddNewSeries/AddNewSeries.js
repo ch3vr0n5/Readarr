@@ -146,11 +146,6 @@ class AddNewSeries extends Component {
               <div className={styles.message}>
                 <div className={styles.noResults}>Couldn't find any results for '{term}'</div>
                 <div>You can also search using ISBN of a book.</div>
-                <div>
-                  <Link to="https://github.com/Sonarr/Sonarr/wiki/FAQ#why-cant-i-add-a-new-series-when-i-know-the-tvdb-id">
-                    Why can't I find my show?
-                  </Link>
-                </div>
               </div>
           }
 
