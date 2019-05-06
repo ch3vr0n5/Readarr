@@ -17,7 +17,7 @@ namespace Sonarr.Api.V3.Tags
             GetResourceAll = GetAll;
         }
 
-        private TagDetailsResource Get(int id)
+        new private TagDetailsResource Get(int id)
         {
             return _tagService.Details(id).ToResource();
         }

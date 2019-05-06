@@ -24,7 +24,7 @@ namespace Sonarr.Api.V3.Tags
             DeleteResource = Delete;
         }
 
-        private TagResource Get(int id)
+        new private TagResource Get(int id)
         {
             return _tagService.GetTag(id).ToResource();
         }
@@ -44,7 +44,7 @@ namespace Sonarr.Api.V3.Tags
             _tagService.Update(resource.ToModel());
         }
 
-        private void Delete(int id)
+        new private void Delete(int id)
         {
             _tagService.Delete(id);
         }

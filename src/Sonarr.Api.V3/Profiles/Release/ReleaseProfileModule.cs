@@ -32,7 +32,7 @@ namespace Sonarr.Api.V3.Profiles.Release
             });
         }
 
-        private ReleaseProfileResource Get(int id)
+        new private ReleaseProfileResource Get(int id)
         {
             return _releaseProfileService.Get(id).ToResource();
         }
@@ -52,7 +52,7 @@ namespace Sonarr.Api.V3.Profiles.Release
             _releaseProfileService.Update(resource.ToModel());
         }
 
-        private void Delete(int id)
+        new private void Delete(int id)
         {
             _releaseProfileService.Delete(id);
         }
