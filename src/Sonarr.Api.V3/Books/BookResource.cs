@@ -1,4 +1,4 @@
-﻿using NzbDrone.Core.Books;
+using NzbDrone.Core.Books;
 using NzbDrone.Core.MediaCover;
 using NzbDrone.Core.Tv;
 using Sonarr.Http.REST;
@@ -24,6 +24,7 @@ namespace Sonarr.Api.V3.Books
         public List<Author> Authors { get; set; }
         public string RootFolderPath { get; set; }
         public DateTime Added { get; set; }
+        public SeriesStatisticsResource Statistics { get; set; }
     }
 
     public static class BookResourceMapper

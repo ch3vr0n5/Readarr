@@ -37,7 +37,7 @@ namespace Sonarr.Api.V3.Series
                 //if (poster != null)
                 //   resource.RemotePoster = poster.Url;
 
-                //resource.Statistics = new SeriesStatistics().ToResource(resource.Seasons);
+                resource.Statistics = null; //new SeriesStatistics().ToResource(resource.Seasons);
 
                 yield return resource;
             }
