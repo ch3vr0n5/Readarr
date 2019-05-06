@@ -1,6 +1,7 @@
-using NzbDrone.Core.Books;
+﻿using NzbDrone.Core.Books;
 using NzbDrone.Core.MediaCover;
 using NzbDrone.Core.Tv;
+using Sonarr.Api.V3.Series;
 using Sonarr.Http.REST;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,15 @@ namespace Sonarr.Api.V3.Books
             {
                 Id = model.Id,
                 ISBN = model.ISBN,
-                Title = model.Title
+                Title = model.Title,
+                SubTitle = model.SubTitle,
+                Monitored = model.Monitored,
+                Images = model.Images,
+                TitleSlug = model.TitleSlug,
+                Path = model.Path,
+                Ratings = model.Ratings,
+                Authors = model.Authors,
+                Added = model.Added
             };
         }
 
@@ -50,6 +59,14 @@ namespace Sonarr.Api.V3.Books
                 Id = resource.Id,
                 ISBN = resource.ISBN,
                 Title = resource.Title,
+                SubTitle = resource.SubTitle,
+                Monitored = resource.Monitored,
+                Images = resource.Images,
+                TitleSlug = resource.TitleSlug,
+                Path = resource.Path,
+                Ratings = resource.Ratings,
+                Authors = resource.Authors,
+                Added = resource.Added
             };
         }
 
