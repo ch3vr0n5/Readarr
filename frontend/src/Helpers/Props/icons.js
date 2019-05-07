@@ -95,7 +95,8 @@ import {
   faUser as fasUser,
   faUserPlus as fasUserPlus,
   faVial as fasVial,
-  faWrench as fasWrench
+  faWrench as fasWrench,
+  faBookOpen as fasBooks
 } from '@fortawesome/free-solid-svg-icons';
 
 //
@@ -109,6 +110,7 @@ export const ADVANCED_SETTINGS = fasCog;
 export const ARROW_LEFT = fasArrowCircleLeft;
 export const ARROW_RIGHT = fasArrowCircleRight;
 export const BACKUP = farFileArchive;
+export const BOOKS_CONTINUING = fasBooks;
 export const BUG = fasBug;
 export const CALENDAR = fasCalendarAlt;
 export const CALENDAR_O = farCalendar;
