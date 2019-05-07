@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -54,10 +54,10 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
                 }
             }
 
-            var episodes = httpResponse.Resource.Episodes.Select(MapEpisode);
-            var series = MapSeries(httpResponse.Resource);
+            //var episodes = httpResponse.Resource.Episodes.Select(MapEpisode);
+            //var series = MapSeries(httpResponse.Resource);
 
-            return new Tuple<Series, List<Episode>>(series, episodes.ToList());
+            return null;//new Tuple<Series, List<Episode>>(series, episodes.ToList());
         }
 
         public List<Book> SearchForNewBooks(string title)
