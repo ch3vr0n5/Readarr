@@ -20,6 +20,8 @@ namespace NzbDrone.Core.Books
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string Overview { get; set; }
+        public string Publisher { get; set; }
+        public DateTime PublishDate { get; set; }
 
         public bool Monitored { get; set; }
         public List<MediaCover.MediaCover> Images { get; set; }
