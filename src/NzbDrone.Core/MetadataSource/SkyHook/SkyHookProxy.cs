@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -113,8 +113,16 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             book.Title = volume.volumeInfo.title;
             book.SubTitle = volume.volumeInfo.subtitle;
             book.Overview = volume.volumeInfo.description;
+            book.Publisher = volume.volumeInfo.publisher;
+            book.PublishDate = Convert.ToDateTime(volume.volumeInfo.publishedDate);
             book.Monitored = true;
+
+            //Some books just don't have images
+            if(volume.volumeInfo.imageLinks != null)
+                book.Images = MapImages(volume.volumeInfo.imageLinks);
+
             book.Ratings = MapRatings(volume.volumeInfo);
+            book.Authors = volume.volumeInfo.authors.SelectList(MapAuthor);
             
             return book;
         }
@@ -133,148 +141,23 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             };
         }
 
-        private Series MapSeries(ShowResource show)
+        private static List<MediaCover.MediaCover> MapImages(ImageLinks links)
         {
-            var series = new Series();
-            series.TvdbId = show.TvdbId;
-
-            if (show.TvRageId.HasValue)
-            {
-                series.TvRageId = show.TvRageId.Value;
-            }
-
-            if (show.TvMazeId.HasValue)
-            {
-                series.TvMazeId = show.TvMazeId.Value;
-            }
-
-            series.ImdbId = show.ImdbId;
-            series.Title = show.Title;
-            series.CleanTitle = Parser.Parser.CleanSeriesTitle(show.Title);
-            series.SortTitle = SeriesTitleNormalizer.Normalize(show.Title, show.TvdbId);
-
-            if (show.FirstAired != null)
-            {
-                series.FirstAired = DateTime.ParseExact(show.FirstAired, "yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo).ToUniversalTime();
-                series.Year = series.FirstAired.Value.Year;
-            }
-
-            series.Overview = show.Overview;
-
-            if (show.Runtime != null)
-            {
-                series.Runtime = show.Runtime.Value;
-            }
-
-            series.Network = show.Network;
-
-            if (show.TimeOfDay != null)
-            {
-                series.AirTime = string.Format("{0:00}:{1:00}", show.TimeOfDay.Hours, show.TimeOfDay.Minutes);
-            }
-
-            series.TitleSlug = show.Slug;
-            series.Status = MapSeriesStatus(show.Status);
-            //series.Ratings = MapRatings(show.Rating);
-            series.Genres = show.Genres;
-
-            if (show.ContentRating.IsNotNullOrWhiteSpace())
-            {
-                series.Certification = show.ContentRating.ToUpper();
-            }
-            
-            series.Actors = show.Actors.Select(MapActors).ToList();
-            series.Seasons = show.Seasons.Select(MapSeason).ToList();
-            series.Images = show.Images.Select(MapImage).ToList();
-            series.Monitored = true;
-
-            return series;
-        }
-
-        private static Actor MapActors(ActorResource arg)
-        {
-            var newActor = new Actor
-            {
-                Name = arg.Name,
-                Character = arg.Character
-            };
-
-            if (arg.Image != null)
-            {
-                newActor.Images = new List<MediaCover.MediaCover>
+            return new List<MediaCover.MediaCover> {
+                new MediaCover.MediaCover
                 {
-                    new MediaCover.MediaCover(MediaCoverTypes.Headshot, arg.Image)
-                };
-            }
-
-            return newActor;
-        }
-
-        private static Episode MapEpisode(EpisodeResource oracleEpisode)
-        {
-            var episode = new Episode();
-            episode.Overview = oracleEpisode.Overview;
-            episode.SeasonNumber = oracleEpisode.SeasonNumber;
-            episode.EpisodeNumber = oracleEpisode.EpisodeNumber;
-            episode.AbsoluteEpisodeNumber = oracleEpisode.AbsoluteEpisodeNumber;
-            episode.Title = oracleEpisode.Title;
-
-            episode.AirDate = oracleEpisode.AirDate;
-            episode.AirDateUtc = oracleEpisode.AirDateUtc;
-
-            episode.Ratings = MapRatings(oracleEpisode.Rating);
-
-            //Don't include series fanart images as episode screenshot
-            if (oracleEpisode.Image != null)
-            {
-                episode.Images.Add(new MediaCover.MediaCover(MediaCoverTypes.Screenshot, oracleEpisode.Image));
-            }
-
-            return episode;
-        }
-
-        private static Season MapSeason(SeasonResource seasonResource)
-        {
-            return new Season
-            {
-                SeasonNumber = seasonResource.SeasonNumber,
-                Images = seasonResource.Images.Select(MapImage).ToList(),
-                Monitored = seasonResource.SeasonNumber > 0
+                    Url = links.thumbnail,
+                    CoverType = MediaCoverTypes.Poster
+                }
             };
         }
 
-        private static SeriesStatusType MapSeriesStatus(string status)
+        private static Author MapAuthor(string author)
         {
-            if (status.Equals("ended", StringComparison.InvariantCultureIgnoreCase))
+            return new Author()
             {
-                return SeriesStatusType.Ended;
-            }
-
-            return SeriesStatusType.Continuing;
-        }
-
-        private static MediaCover.MediaCover MapImage(ImageResource arg)
-        {
-            return new MediaCover.MediaCover
-            {
-                Url = arg.Url,
-                CoverType = MapCoverType(arg.CoverType)
+                Name = author
             };
-        }
-
-        private static MediaCoverTypes MapCoverType(string coverType)
-        {
-            switch (coverType.ToLower())
-            {
-                case "poster":
-                    return MediaCoverTypes.Poster;
-                case "banner":
-                    return MediaCoverTypes.Banner;
-                case "fanart":
-                    return MediaCoverTypes.Fanart;
-                default:
-                    return MediaCoverTypes.Unknown;
-            }
         }
     }
 }
