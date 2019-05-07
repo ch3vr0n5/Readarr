@@ -58,18 +58,12 @@ class AddNewSeriesSearchResult extends Component {
       isSmallScreen
     } = this.props;
 
-    const seasonCount = statistics.seasonCount;
-
     const {
       isNewAddSeriesModalOpen
     } = this.state;
 
     const linkProps = isExistingSeries ? { to: `/series/${titleSlug}` } : { onPress: this.onPress };
     let seasons = '1 Season';
-
-    if (seasonCount > 1) {
-      seasons = `${seasonCount} Seasons`;
-    }
 
     return (
       <div>
@@ -129,14 +123,6 @@ class AddNewSeriesSearchResult extends Component {
               }
 
               {
-                seasonCount ?
-                  <Label size={sizes.LARGE}>
-                    {seasons}
-                  </Label> :
-                  null
-              }
-
-              {
                 status === 'ended' ?
                   <Label
                     kind={kinds.DANGER}
@@ -156,7 +142,7 @@ class AddNewSeriesSearchResult extends Component {
 
         <AddNewSeriesModal
           isOpen={isNewAddSeriesModalOpen && !isExistingSeries}
-          tvdbId={tvdbId}
+          isbn={ISBN}
           title={title}
           year={year}
           overview={overview}
