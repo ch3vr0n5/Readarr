@@ -114,7 +114,13 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             book.SubTitle = volume.volumeInfo.subtitle;
             book.Overview = volume.volumeInfo.description;
             book.Publisher = volume.volumeInfo.publisher;
-            book.PublishDate = Convert.ToDateTime(volume.volumeInfo.publishedDate);
+
+            //Date seems to be missing day or month sometimes
+            var parts = volume.volumeInfo.publishedDate.Split('-').Select(a => Convert.ToInt32(a));
+            var dateParts = Enumerable.Repeat(1, 3).Select((a, i) => parts.Count() > i ? parts.ElementAt(i) : 1).ToList();
+
+            book.PublishDate = new DateTime(dateParts[0], dateParts[1], dateParts[2]);
+
             book.Monitored = true;
 
             //Some books just don't have images
