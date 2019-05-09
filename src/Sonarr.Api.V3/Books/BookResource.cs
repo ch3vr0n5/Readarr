@@ -16,6 +16,8 @@ namespace Sonarr.Api.V3.Books
         public long ISBN { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
+        public string Overview { get; set; }
+        public string Publisher { get; set; }
 
         public bool Monitored { get; set; }
         public List<MediaCover> Images { get; set; }
@@ -40,6 +42,8 @@ namespace Sonarr.Api.V3.Books
                 ISBN = model.ISBN,
                 Title = model.Title,
                 SubTitle = model.SubTitle,
+                Overview = model.Overview,
+                Publisher = model.Publisher,
                 Monitored = model.Monitored,
                 Images = model.Images,
                 TitleSlug = model.TitleSlug,
@@ -60,6 +64,8 @@ namespace Sonarr.Api.V3.Books
                 ISBN = resource.ISBN,
                 Title = resource.Title,
                 SubTitle = resource.SubTitle,
+                Overview = resource.Overview,
+                Publisher = resource.Publisher,
                 Monitored = resource.Monitored,
                 Images = resource.Images,
                 TitleSlug = resource.TitleSlug,

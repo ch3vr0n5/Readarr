@@ -48,7 +48,7 @@ class AddNewSeriesSearchResult extends Component {
       title,
       titleSlug,
       year,
-      network,
+      publisher,
       status,
       overview,
       statistics,
@@ -115,9 +115,9 @@ class AddNewSeriesSearchResult extends Component {
               </Label>
 
               {
-                network ?
+                publisher ?
                   <Label size={sizes.LARGE}>
-                    {network}
+                    {publisher}
                   </Label> :
                   null
               }
