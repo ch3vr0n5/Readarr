@@ -16,7 +16,7 @@ namespace NzbDrone.Core.Parser
 
         private static readonly Regex SourceRegex = new Regex(@"\b(?:
                                                                 (?<bluray>BluRay|Blu-Ray|HD-?DVD|BD)|
-                                                                (?<webdl>WEB[-_. ]DL|WEBDL|AmazonHD|iTunesHD|NetflixU?HD|WebHD|[. ]WEB[. ](?:[xh]26[45]|DDP?5[. ]1)|\d+0p[. ]WEB[. ]|WEB-DLMux|\b\s\/\sWEB\s\/\s\b)|
+                                                                (?<webdl>WEB[-_. ]DL|WEBDL|AmazonHD|iTunesHD|NetflixU?HD|WebHD|[. ]WEB[. ](?:[xh]26[45]|DDP?5[. ]1)|\d+0p[-. ]WEB[-. ]|WEB-DLMux|\b\s\/\sWEB\s\/\s\b)|
                                                                 (?<webrip>WebRip|Web-Rip)|
                                                                 (?<hdtv>HDTV)|
                                                                 (?<bdrip>BDRip)|
@@ -32,10 +32,10 @@ namespace NzbDrone.Core.Parser
         private static readonly Regex RawHDRegex = new Regex(@"\b(?<rawhd>RawHD|1080i[-_. ]HDTV|Raw[-_. ]HD|MPEG[-_. ]?2)\b",
                                                                 RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-        private static readonly Regex ProperRegex = new Regex(@"\b(?<proper>proper|rerip)\b",
+        private static readonly Regex ProperRegex = new Regex(@"\b(?<proper>proper)\b",
                                                                 RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-        private static readonly Regex RepackRegex = new Regex(@"\b(?<repack>repack)\b",
+        private static readonly Regex RepackRegex = new Regex(@"\b(?<repack>repack|rerip)\b",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private static readonly Regex VersionRegex = new Regex(@"\dv(?<version>\d)\b|\[v(?<version>\d)\]",
