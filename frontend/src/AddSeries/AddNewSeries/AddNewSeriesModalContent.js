@@ -168,42 +168,6 @@ class AddNewSeriesModalContent extends Component {
                 </FormGroup>
 
                 <FormGroup>
-                  <FormLabel>
-                    Series Type
-
-                    <Popover
-                      anchor={
-                        <Icon
-                          className={styles.labelIcon}
-                          name={icons.INFO}
-                        />
-                      }
-                      title="Series Types"
-                      body={<SeriesTypePopoverContent />}
-                      position={tooltipPositions.RIGHT}
-                    />
-                  </FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.SERIES_TYPE_SELECT}
-                    name="seriesType"
-                    onChange={onInputChange}
-                    {...seriesType}
-                  />
-                </FormGroup>
-
-                <FormGroup>
-                  <FormLabel>Season Folder</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.CHECK}
-                    name="seasonFolder"
-                    onChange={onInputChange}
-                    {...seasonFolder}
-                  />
-                </FormGroup>
-
-                <FormGroup>
                   <FormLabel>Tags</FormLabel>
 
                   <FormInputGroup
