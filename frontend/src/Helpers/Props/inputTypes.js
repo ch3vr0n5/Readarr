@@ -11,7 +11,6 @@ export const PATH = 'path';
 export const LANGUAGE_PROFILE_SELECT = 'languageProfileSelect';
 export const ROOT_FOLDER_SELECT = 'rootFolderSelect';
 export const SELECT = 'select';
-export const SERIES_TYPE_SELECT = 'seriesTypeSelect';
 export const TAG = 'tag';
 export const TEXT = 'text';
 export const TEXT_TAG = 'textTag';
@@ -30,7 +29,6 @@ export const all = [
   LANGUAGE_PROFILE_SELECT,
   ROOT_FOLDER_SELECT,
   SELECT,
-  SERIES_TYPE_SELECT,
   TAG,
   TEXT,
   TEXT_TAG

@@ -14,7 +14,6 @@ import PasswordInput from './PasswordInput';
 import PathInputConnector from './PathInputConnector';
 import LanguageProfileSelectInputConnector from './LanguageProfileSelectInputConnector';
 import RootFolderSelectInputConnector from './RootFolderSelectInputConnector';
-import SeriesTypeSelectInput from './SeriesTypeSelectInput';
 import SelectInput from './SelectInput';
 import TagInputConnector from './TagInputConnector';
 import TextTagInputConnector from './TextTagInputConnector';
@@ -62,9 +61,6 @@ function getComponent(type) {
 
     case inputTypes.SELECT:
       return SelectInput;
-
-    case inputTypes.SERIES_TYPE_SELECT:
-      return SeriesTypeSelectInput;
 
     case inputTypes.TAG:
       return TagInputConnector;
