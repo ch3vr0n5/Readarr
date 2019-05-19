@@ -145,17 +145,6 @@ class AddNewSeriesModalContent extends Component {
                   />
                 </FormGroup>
 
-                <FormGroup>
-                  <FormLabel>Quality Profile</FormLabel>
-
-                  <FormInputGroup
-                    type={inputTypes.QUALITY_PROFILE_SELECT}
-                    name="qualityProfileId"
-                    onChange={this.onQualityProfileIdChange}
-                    {...qualityProfileId}
-                  />
-                </FormGroup>
-
                 <FormGroup className={showLanguageProfile ? undefined : styles.hideLanguageProfile}>
                   <FormLabel>Language Profile</FormLabel>
 
