@@ -27,6 +27,7 @@ namespace Sonarr.Api.V3.Books
         public List<Author> Authors { get; set; }
         public string RootFolderPath { get; set; }
         public DateTime Added { get; set; }
+        public DateTime PublishDate { get; set; }
         public SeriesStatisticsResource Statistics { get; set; }
     }
 
@@ -50,7 +51,8 @@ namespace Sonarr.Api.V3.Books
                 Path = model.Path,
                 Ratings = model.Ratings,
                 Authors = model.Authors,
-                Added = model.Added
+                Added = model.Added,
+                PublishDate = model.PublishDate
             };
         }
 
@@ -72,7 +74,8 @@ namespace Sonarr.Api.V3.Books
                 Path = resource.Path,
                 Ratings = resource.Ratings,
                 Authors = resource.Authors,
-                Added = resource.Added
+                Added = resource.Added,
+                PublishDate = resource.PublishDate
             };
         }
 
