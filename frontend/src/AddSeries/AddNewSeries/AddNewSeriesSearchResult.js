@@ -47,7 +47,7 @@ class AddNewSeriesSearchResult extends Component {
       ISBN,
       title,
       titleSlug,
-      year,
+      publishDate,
       publisher,
       status,
       overview,
@@ -87,9 +87,9 @@ class AddNewSeriesSearchResult extends Component {
               {title}
 
               {
-                !title.contains(year) && year ?
+                !title.contains(publishDate) && publishDate ?
                   <span className={styles.year}>
-                    ({year})
+                    ({publishDate.geYear()})
                   </span> :
                   null
               }
@@ -143,8 +143,8 @@ class AddNewSeriesSearchResult extends Component {
         <AddNewSeriesModal
           isOpen={isNewAddSeriesModalOpen && !isExistingSeries}
           isbn={ISBN}
+          publishDate={publishDate}
           title={title}
-          year={year}
           overview={overview}
           images={images}
           onModalClose={this.onAddSerisModalClose}
@@ -158,11 +158,11 @@ AddNewSeriesSearchResult.propTypes = {
   tvdbId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   titleSlug: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  publishDate: PropTypes.object.isRequired,
   network: PropTypes.string,
   status: PropTypes.string.isRequired,
   overview: PropTypes.string,
-  statistics: PropTypes.object.isRequired,
+//   statistics: PropTypes.object.isRequired,
   ratings: PropTypes.object.isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   isExistingSeries: PropTypes.bool.isRequired,

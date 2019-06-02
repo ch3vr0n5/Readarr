@@ -56,7 +56,7 @@ class AddNewSeriesModalContent extends Component {
   render() {
     const {
       title,
-      year,
+      publishDate,
       overview,
       images,
       isAdding,
@@ -202,7 +202,7 @@ class AddNewSeriesModalContent extends Component {
 
 AddNewSeriesModalContent.propTypes = {
   title: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  publishDate: PropTypes.object.isRequired,
   overview: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   isAdding: PropTypes.bool.isRequired,
