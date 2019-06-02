@@ -89,7 +89,7 @@ class AddNewSeriesSearchResult extends Component {
               {
                 !title.contains(publishDate) && publishDate ?
                   <span className={styles.year}>
-                    ({publishDate.geYear()})
+                    ({new Date(publishDate).getFullYear()})
                   </span> :
                   null
               }
