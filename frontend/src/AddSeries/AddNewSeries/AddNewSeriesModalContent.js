@@ -80,8 +80,8 @@ class AddNewSeriesModalContent extends Component {
           {title}
 
           {
-            !title.contains(year) && !!year &&
-              <span className={styles.year}>({year})</span>
+            !title.contains(publishDate) && !!publishDate &&
+              <span className={styles.year}>({new Date(publishDate).getFullYear()})</span>
           }
         </ModalHeader>
 
