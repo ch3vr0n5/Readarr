@@ -158,7 +158,7 @@ AddNewSeriesSearchResult.propTypes = {
   tvdbId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   titleSlug: PropTypes.string.isRequired,
-  publishDate: PropTypes.object.isRequired,
+  publishDate: PropTypes.string.isRequired,
   network: PropTypes.string,
   status: PropTypes.string.isRequired,
   overview: PropTypes.string,

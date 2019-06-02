@@ -202,7 +202,7 @@ class AddNewSeriesModalContent extends Component {
 
 AddNewSeriesModalContent.propTypes = {
   title: PropTypes.string.isRequired,
-  publishDate: PropTypes.object.isRequired,
+  publishDate: PropTypes.string.isRequired,
   overview: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   isAdding: PropTypes.bool.isRequired,
