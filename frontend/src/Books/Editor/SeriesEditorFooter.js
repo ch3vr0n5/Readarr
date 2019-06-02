@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { kinds } from 'Helpers/Props';
 import SelectInput from 'Components/Form/SelectInput';
 import LanguageProfileSelectInputConnector from 'Components/Form/LanguageProfileSelectInputConnector';
-import QualityProfileSelectInputConnector from 'Components/Form/QualityProfileSelectInputConnector';
+// import QualityProfileSelectInputConnector from 'Components/Form/QualityProfileSelectInputConnector';
 import RootFolderSelectInputConnector from 'Components/Form/RootFolderSelectInputConnector';
-import SeriesTypeSelectInput from 'Components/Form/SeriesTypeSelectInput';
+// import SeriesTypeSelectInput from 'Components/Form/SeriesTypeSelectInput';
 import SpinnerButton from 'Components/Link/SpinnerButton';
 import PageContentFooter from 'Components/Page/PageContentFooter';
 import MoveSeriesModal from 'Books/MoveSeries/MoveSeriesModal';
@@ -198,13 +198,13 @@ class SeriesEditorFooter extends Component {
             isSaving={isSaving && qualityProfileId !== NO_CHANGE}
           />
 
-          <QualityProfileSelectInputConnector
+          {/* <QualityProfileSelectInputConnector
             name="qualityProfileId"
             value={qualityProfileId}
             includeNoChange={true}
             isDisabled={!selectedCount}
             onChange={this.onInputChange}
-          />
+          /> */}
         </div>
 
         {
@@ -231,13 +231,13 @@ class SeriesEditorFooter extends Component {
             isSaving={isSaving && seriesType !== NO_CHANGE}
           />
 
-          <SeriesTypeSelectInput
+          {/* <SeriesTypeSelectInput
             name="seriesType"
             value={seriesType}
             includeNoChange={true}
             isDisabled={!selectedCount}
             onChange={this.onInputChange}
-          />
+          /> */}
         </div>
 
         <div className={styles.inputContainer}>
