@@ -6,4 +6,4 @@ steps:
   image: mono
   commands:
   - chmod +rwx ./test.sh
-  - ./test.sh
+  - ./test.sh Linux Unit
