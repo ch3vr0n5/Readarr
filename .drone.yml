@@ -5,4 +5,5 @@ steps:
 - name: test
   image: mono
   commands:
+  - chmod +rwx ./test.sh
   - ./test.sh
