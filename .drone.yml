@@ -8,8 +8,8 @@ steps:
 - name: clone
   image: docker:git
   commands:
-  - git config --global http.postBuffer 157286400
   - git clone https://github.com/tingtom/Readarr.git
+  - git fetch -a
   - git checkout ${DRONE_COMMIT}
 
 - name: test
