@@ -5,6 +5,12 @@ clone:
   depth: 1
   
 steps:
+- name: build
+  image: mono
+  commands:
+  - chmod +rwx ./build.sh
+  - ./build.sh
+
 - name: test
   image: mono
   commands:
