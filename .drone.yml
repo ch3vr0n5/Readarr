@@ -5,6 +5,11 @@ clone:
   depth: 1
   
 steps:
+- name: submodules
+  image: docker:git
+  commands:
+  - git submodule update --recursive --remote
+  
 - name: build
   image: mono
   commands:
