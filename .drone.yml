@@ -1,0 +1,12 @@
+kind: pipeline
+name: default
+
+clone:
+  depth: 1
+  
+steps:
+- name: test
+  image: mono
+  commands:
+  - chmod +rwx ./test.sh
+  - ./test.sh Linux Unit
