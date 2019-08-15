@@ -115,12 +115,12 @@ export const actionHandlers = handleThunks({
   [ADD_SERIES]: function(getState, payload, dispatch) {
     dispatch(set({ section, isAdding: true }));
 
-    const tvdbId = payload.tvdbId;
+    const tvdbId = payload.isbn;
     const items = getState().addSeries.items;
     const newSeries = getNewSeries(_.cloneDeep(_.find(items, { tvdbId })), payload);
 
     const promise = createAjaxRequest({
-      url: '/series',
+      url: '/books',
       method: 'POST',
       contentType: 'application/json',
       data: JSON.stringify(newSeries)
