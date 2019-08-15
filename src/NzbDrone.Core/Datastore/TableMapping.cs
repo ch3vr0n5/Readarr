@@ -81,11 +81,8 @@ namespace NzbDrone.Core.Datastore
             Mapper.Entity<History.History>().RegisterModel("History")
                   .AutoMapChildModels();
 
-            Mapper.Entity<Series>().RegisterModel("Series")
-                  .Ignore(s => s.RootFolderPath)
-                  .Relationship()
-                  .HasOne(s => s.QualityProfile, s => s.QualityProfileId)
-                  .HasOne(s => s.LanguageProfile, s => s.LanguageProfileId);
+            Mapper.Entity<Books.Book>().RegisterModel("Books")
+                .Ignore(b => b.RootFolderPath);
 
             Mapper.Entity<EpisodeFile>().RegisterModel("EpisodeFiles")
                   .Ignore(f => f.Path)
@@ -94,13 +91,6 @@ namespace NzbDrone.Core.Datastore
                   .LazyLoad(condition: parent => parent.Id > 0,
                             query: (db, parent) => db.Query<Episode>().Where(c => c.EpisodeFileId == parent.Id).ToList())
                   .HasOne(file => file.Series, file => file.SeriesId);
-
-            Mapper.Entity<Episode>().RegisterModel("Episodes")
-                  .Ignore(e => e.SeriesTitle)
-                  .Ignore(e => e.Series)
-                  .Ignore(e => e.HasFile)
-                  .Relationship()
-                  .HasOne(episode => episode.EpisodeFile, episode => episode.EpisodeFileId);
 
             Mapper.Entity<QualityDefinition>().RegisterModel("QualityDefinitions")
                   .Ignore(d => d.GroupName)
