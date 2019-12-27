@@ -10,7 +10,6 @@ namespace NzbDrone.Core.Datastore.Migration
         protected override void MainDbUpgrade()
         {
             Delete.Table("Series");
-            Delete.Table("Seasons");
             Delete.Table("Episodes");
 
             Create.TableForModel("Books")

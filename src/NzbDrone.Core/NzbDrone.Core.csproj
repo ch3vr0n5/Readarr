@@ -127,6 +127,7 @@
     <Compile Include="Blacklisting\ClearBlacklistCommand.cs" />
     <Compile Include="Books\Author.cs" />
     <Compile Include="Books\Book.cs" />
+    <Compile Include="Books\BookRepository.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ConfigFileProvider.cs" />
     <Compile Include="Configuration\ConfigRepository.cs" />

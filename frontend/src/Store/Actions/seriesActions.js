@@ -224,7 +224,7 @@ function getSaveAjaxOptions({ ajaxOptions, payload }) {
 
 export const actionHandlers = handleThunks({
 
-  [FETCH_SERIES]: createFetchHandler(section, '/series'),
+  [FETCH_SERIES]: createFetchHandler(section, '/book'),
   [SAVE_SERIES]: createSaveProviderHandler(section, '/series', { getAjaxOptions: getSaveAjaxOptions }),
   [DELETE_SERIES]: createRemoveItemHandler(section, '/series'),
 

@@ -33,7 +33,7 @@ namespace Sonarr.Api.V3.Books
 
     public static class BookResourceMapper
     {
-        public static BookResource ToResource(this NzbDrone.Core.Books.Book model)
+        public static BookResource ToResource(this Book model)
         {
             if (model == null) return null;
 
@@ -56,11 +56,11 @@ namespace Sonarr.Api.V3.Books
             };
         }
 
-        public static NzbDrone.Core.Books.Book ToModel(this BookResource resource)
+        public static Book ToModel(this BookResource resource)
         {
             if (resource == null) return null;
 
-            return new NzbDrone.Core.Books.Book
+            return new Book
             {
                 Id = resource.Id,
                 ISBN = resource.ISBN,
@@ -79,7 +79,7 @@ namespace Sonarr.Api.V3.Books
             };
         }
 
-        public static NzbDrone.Core.Books.Book ToModel(this BookResource resource, NzbDrone.Core.Books.Book series)
+        public static Book ToModel(this BookResource resource, Book series)
         {
             var updatedSeries = resource.ToModel();
 
@@ -88,12 +88,12 @@ namespace Sonarr.Api.V3.Books
             return series;
         }
 
-        public static List<BookResource> ToResource(this IEnumerable<NzbDrone.Core.Books.Book> series)
+        public static List<BookResource> ToResource(this IEnumerable<Book> series)
         {
             return series.Select(s => ToResource(s)).ToList();
         }
 
-        public static List<NzbDrone.Core.Books.Book> ToModel(this IEnumerable<BookResource> resources)
+        public static List<Book> ToModel(this IEnumerable<BookResource> resources)
         {
             return resources.Select(ToModel).ToList();
         }

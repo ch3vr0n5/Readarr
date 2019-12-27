@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using NLog;
 using NzbDrone.Common.Extensions;
+using NzbDrone.Core.Books;
 using NzbDrone.Core.Messaging.Events;
 using NzbDrone.Core.Organizer;
 using NzbDrone.Core.Parser;
@@ -24,6 +25,7 @@ namespace NzbDrone.Core.Tv
         Series FindByPath(string path);
         void DeleteSeries(int seriesId, bool deleteFiles);
         List<Series> GetAllSeries();
+        List<Book> GetAllBooks();
         List<Series> AllForTag(int tagId);
         Series UpdateSeries(Series series, bool updateEpisodesToMatchSeason = true);
         List<Series> UpdateSeries(List<Series> series, bool useExistingRelativeFolder);
@@ -34,6 +36,7 @@ namespace NzbDrone.Core.Tv
     public class SeriesService : ISeriesService
     {
         private readonly ISeriesRepository _seriesRepository;
+        private readonly IBookRepository _bookRepository;
         private readonly IEventAggregator _eventAggregator;
         private readonly IEpisodeService _episodeService;
         private readonly IBuildSeriesPaths _seriesPathBuilder;
@@ -43,9 +46,10 @@ namespace NzbDrone.Core.Tv
                              IEventAggregator eventAggregator,
                              IEpisodeService episodeService,
                              IBuildSeriesPaths seriesPathBuilder,
-                             Logger logger)
+                             Logger logger, IBookRepository bookRepository)
         {
             _seriesRepository = seriesRepository;
+            _bookRepository = bookRepository;
             _eventAggregator = eventAggregator;
             _episodeService = episodeService;
             _seriesPathBuilder = seriesPathBuilder;
@@ -225,6 +229,11 @@ namespace NzbDrone.Core.Tv
         public void RemoveAddOptions(Series series)
         {
             _seriesRepository.SetFields(series, s => s.AddOptions);
+        }
+
+        public List<Book> GetAllBooks()
+        {
+            return _bookRepository.All().ToList();
         }
     }
 }

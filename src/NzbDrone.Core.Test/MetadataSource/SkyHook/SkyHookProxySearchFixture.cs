@@ -58,7 +58,7 @@ namespace NzbDrone.Core.Test.MetadataSource.SkyHook
                 ISBN = isbn
             };
             
-            Mocker.GetMock<ISeriesService>().Setup(c => c.FindByTvdbId(isbn)).Returns(existingSeries);
+            //Mocker.GetMock<ISeriesService>().Setup(c => c.FindByTvdbId(isbn)).Returns(existingSeries);
 
             var result = Subject.SearchForNewBooks("isbn: " + isbn);
 

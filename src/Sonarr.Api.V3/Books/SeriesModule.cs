@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentValidation;
 using NzbDrone.Common.Extensions;
+using NzbDrone.Core.Books;
 using NzbDrone.Core.DataAugmentation.Scene;
 using NzbDrone.Core.Datastore.Events;
 using NzbDrone.Core.MediaCover;
@@ -17,12 +18,13 @@ using NzbDrone.Core.Tv.Events;
 using NzbDrone.Core.Validation;
 using NzbDrone.Core.Validation.Paths;
 using NzbDrone.SignalR;
+using Sonarr.Api.V3.Books;
 using Sonarr.Http;
 using Sonarr.Http.Extensions;
 
 namespace Sonarr.Api.V3.Series
 {
-    public class SeriesModule : SonarrRestModuleWithSignalR<SeriesResource, NzbDrone.Core.Tv.Series>, 
+    public class SeriesModule : SonarrRestModuleWithSignalR<BookResource, Book>, 
                                 IHandle<EpisodeImportedEvent>, 
                                 IHandle<EpisodeFileDeletedEvent>,
                                 IHandle<SeriesUpdatedEvent>,       
@@ -69,12 +71,12 @@ namespace Sonarr.Api.V3.Series
             _rootFolderService = rootFolderService;
 
             GetResourceAll = AllSeries;
-            GetResourceById = GetSeries;
-            CreateResource = AddSeries;
-            UpdateResource = UpdateSeries;
+            //GetResourceById = GetSeries;
+            //CreateResource = AddSeries;
+            //UpdateResource = UpdateSeries;
             DeleteResource = DeleteSeries;
 
-            Http.Validation.RuleBuilderExtensions.ValidId(SharedValidator.RuleFor(s => s.QualityProfileId));
+            //Http.Validation.RuleBuilderExtensions.ValidId(SharedValidator.RuleFor(s => s.QualityProfileId));
 
             SharedValidator.RuleFor(s => s.Path)
                            .Cascade(CascadeMode.StopOnFirstFailure)
@@ -86,36 +88,36 @@ namespace Sonarr.Api.V3.Series
                            .SetValidator(systemFolderValidator)
                            .When(s => !s.Path.IsNullOrWhiteSpace());
 
-            SharedValidator.RuleFor(s => s.QualityProfileId).SetValidator(profileExistsValidator);
-            SharedValidator.RuleFor(s => s.LanguageProfileId).SetValidator(languageProfileExistsValidator);
+            //SharedValidator.RuleFor(s => s.QualityProfileId).SetValidator(profileExistsValidator);
+            //SharedValidator.RuleFor(s => s.LanguageProfileId).SetValidator(languageProfileExistsValidator);
 
             PostValidator.RuleFor(s => s.Path).IsValidPath().When(s => s.RootFolderPath.IsNullOrWhiteSpace());
             PostValidator.RuleFor(s => s.RootFolderPath).IsValidPath().When(s => s.Path.IsNullOrWhiteSpace());
             PostValidator.RuleFor(s => s.Title).NotEmpty();
-            PostValidator.RuleFor(s => s.TvdbId).GreaterThan(0).SetValidator(seriesExistsValidator);
+            PostValidator.RuleFor(s => s.ISBN).GreaterThan(0).SetValidator(seriesExistsValidator);
 
             PutValidator.RuleFor(s => s.Path).IsValidPath();
         }
 
-        private List<SeriesResource> AllSeries()
+        private List<BookResource> AllSeries()
         {
-            var tvdbId = Request.GetIntegerQueryParameter("tvdbId");
+            var isbn = Request.GetIntegerQueryParameter("isbn");
             var includeSeasonImages = Request.GetBooleanQueryParameter("includeSeasonImages");
-            var seriesStats = _seriesStatisticsService.SeriesStatistics();
-            var seriesResources = new List<SeriesResource>();
+            //var seriesStats = _seriesStatisticsService.SeriesStatistics();
+            var seriesResources = new List<BookResource>();
 
-            if (tvdbId > 0)
+            if (isbn > 0)
             {
-                seriesResources.AddIfNotNull(_seriesService.FindByTvdbId(tvdbId).ToResource(includeSeasonImages));
+                //seriesResources.AddIfNotNull(_seriesService.FindByTvdbId(isbn).ToResource(includeSeasonImages));
             }
             else
             {
-                seriesResources.AddRange(_seriesService.GetAllSeries().Select(s => s.ToResource(includeSeasonImages)));
+                seriesResources.AddRange(_seriesService.GetAllBooks().Select(s => s.ToResource()));
             }
 
-            MapCoversToLocal(seriesResources.ToArray());
-            LinkSeriesStatistics(seriesResources, seriesStats);
-            PopulateAlternateTitles(seriesResources);
+            //MapCoversToLocal(seriesResources.ToArray());
+            //LinkSeriesStatistics(seriesResources, seriesStats);
+            //PopulateAlternateTitles(seriesResources);
 
             return seriesResources;
         }
@@ -158,7 +160,7 @@ namespace Sonarr.Api.V3.Series
 
             _seriesService.UpdateSeries(model);
 
-            BroadcastResourceChange(ModelAction.Updated, seriesResource);
+            //BroadcastResourceChange(ModelAction.Updated, seriesResource);
         }
 
         private void DeleteSeries(int id)
@@ -266,7 +268,7 @@ namespace Sonarr.Api.V3.Series
 
         public void Handle(SeriesDeletedEvent message)
         {
-            BroadcastResourceChange(ModelAction.Deleted, message.Series.ToResource());
+            //BroadcastResourceChange(ModelAction.Deleted, message.Series.ToResource());
         }
 
         public void Handle(SeriesRenamedEvent message)

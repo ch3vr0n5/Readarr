@@ -4,7 +4,7 @@ import createClientSideCollectionSelector from './createClientSideCollectionSele
 
 function createUnoptimizedSelector(uiSection) {
   return createSelector(
-    createClientSideCollectionSelector('series', uiSection),
+    createClientSideCollectionSelector('books', uiSection),
     (series) => {
       const items = series.items.map((s) => {
         const {
